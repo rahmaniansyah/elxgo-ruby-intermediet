@@ -6,7 +6,7 @@ select orderDetails.order_id as "Order ID", date(orderT.order_date) as "Order Da
     orderT.total_price as "Total",
     group_concat(item.name separator ', ') as "Items bought"
 from orderDetails
-join item on orderDetails.item_id = item.id
+inner join item on orderDetails.item_id = item.id
 left join orderT on orderDetails.order_id = orderT.id
 left join customer on orderT.customer_id = customer.id
 group by orderDetails.order_id;
