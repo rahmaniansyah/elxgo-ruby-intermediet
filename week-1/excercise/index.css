@@ -1,0 +1,22 @@
+html{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.style-table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+tr th{
+    background-color: #008698;
+    color: #ffffff;
+    text-align: left; 
+}
+
+td, th{
+    padding: 1em;
+}
