@@ -1,11 +1,11 @@
 class Item
-    attr_accessor :name, :price, :id, :category, :description
+    attr_accessor :name, :price, :id, :category_id, :description
 
-    def initialize (name, price, id, category = nil, description)
+    def initialize (name, price, id, category_id = nil, description = nil)
         @name = name
         @price = price
         @id = id
-        @category = category
+        @category_id = category_id
         @description = description
     
     end

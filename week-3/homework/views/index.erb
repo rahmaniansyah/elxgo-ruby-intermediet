@@ -12,23 +12,25 @@
             <h1 class="text-center">MENU</h1>
             <hr>
             <div class="card-body">
-                <tbody>
-                    <table class="table-styled">
+                <table class="table-styled">
+                    <tbody>
                         <tr>
                             <td><a href="/new_food" class="btn"> + New Food</a></td>
                         </tr>
+                    <% items.each do |item| %>
                         <tr>
                             <td class="td-name">
-                                <div class="title">AYAM KUNG PAO</div>
+                                <div class="title"><%= item.name %></div>
                                 <div class="desc">
-                                    Ayam garing lembut dengan sambal khas china dan perpaduan rempah pedas
+                                    <%= item.description.nil? ? "Tidak ada deskripsi" : item.description %>
                                 </div>
                                 <div class="detail">
                                     <a href="view/detail_food.html">View Detail</a>
                                 </div>
                             </td>
-                            <td class="td-price">Rp. 25000</td>
+                            <td class="td-price">Rp. <%= item.price %></td>
                         </tr>
+                    <% end %>
                     </tbody>
                 </table>
             </div>

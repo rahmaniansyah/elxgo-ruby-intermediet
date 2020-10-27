@@ -4,7 +4,10 @@ require './db_connector'
 
 # index page show list food
 get '/' do
-    erb :index
+    items = get_all_items
+    erb :index, locals: {
+        items: items
+    }
 end
 
 # ---------------------------------
