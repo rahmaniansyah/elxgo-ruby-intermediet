@@ -23,7 +23,8 @@ def get_all_items
     items
 end
 
-def create_new_item(name, price)
+def create_new_item(query)
     client = create_db_client
-    client.query("insert into item (name, price) values('#{name}','#{price}')")
+    client.query("insert into item (name, price, category_id, description) values 
+                 ('#{query[:name]}','#{query[:price]}','#{query[:category_id]}','#{query[:description]}')")
 end

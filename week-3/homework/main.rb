@@ -17,9 +17,16 @@ get '/new_food' do
 end
 
 post '/new_food' do
-    create_new_item( params['name'], params['price'])
+    query = {
+        name: params['name'],
+        price: params['price'],
+        category_id: params['category'],
+        description: params['description']
+    }
+
+    new_item = create_new_item(query)
     
-    unless params['name'].empty? && params['price'].empty?
+    if new_item
         return "===== Menu #{params['name']} with price #{params['price']} added! ====="
     else
         redirect '/new_food'
