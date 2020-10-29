@@ -26,7 +26,7 @@
                                     <%= item.description.nil? ? "Tidak ada deskripsi" : item.description %>
                                 </div>
                                 <div class="detail">
-                                    <a href="view/detail_food.html">View Detail</a>
+                                    <a href="/detail_food/<%= item.id %>">View Detail</a>
                                 </div>
                             </td>
                             <td><a href="/edit_food/<%= item.id %>" class="btn"><i class="fa fa-edit"></i></a></td>

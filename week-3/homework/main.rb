@@ -63,9 +63,15 @@ post '/edit_food' do
     redirect '/'
 end
 
+# Route to delete food
 get '/food/:id' do
     id = params["id"]
     delete = delete_food(id)
+end
+
+# Route to open detail food
+get '/detail_food/:id' do
+    erb :detail_food
 end
 
 get '/success' do
