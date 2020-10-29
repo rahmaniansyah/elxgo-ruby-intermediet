@@ -63,6 +63,11 @@ post '/edit_food' do
     redirect '/'
 end
 
+get '/food/:id' do
+    id = params["id"]
+    delete = delete_food(id)
+end
+
 get '/success' do
     erb :success
 end

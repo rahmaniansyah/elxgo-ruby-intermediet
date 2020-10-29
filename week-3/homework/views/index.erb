@@ -25,12 +25,12 @@
                                 <div class="desc">
                                     <%= item.description.nil? ? "Tidak ada deskripsi" : item.description %>
                                 </div>
-                                <%# <div class="detail">
+                                <div class="detail">
                                     <a href="view/detail_food.html">View Detail</a>
-                                </div> %>
+                                </div>
                             </td>
                             <td><a href="/edit_food/<%= item.id %>" class="btn"><i class="fa fa-edit"></i></a></td>
-                            <td><a class="btn"><i class="fa fa-trash"></i></a></td>
+                            <td><a href="/food/<%= item.id %>" class="btn"><i class="fa fa-trash"></i></a></td>
                             <td class="td-price">Rp. <%= item.price %></td>
                         </tr>
                     <% end %>

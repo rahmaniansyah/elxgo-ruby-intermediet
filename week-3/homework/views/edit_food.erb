@@ -15,25 +15,25 @@
                 <div class="card-body">
                     <div class="form-style-2">
                         <form action="/edit_food" method="post">
-                            <input type="hidden" id="id" name="id" value="<%= item[0]['id'] %>">
+                            <input type="hidden" id="id" name="id" value="<%= item.first['id'] %>">
                             <label for="name">
                                 <span>Name</span>
-                                <input type="text" class="input-field" name="name" id="name" value="<%= item[0]['name'] %>"/>
+                                <input type="text" class="input-field" name="name" id="name" value="<%= item.first['name'] %>"/>
                             </label>
                             <label for="price">
                                 <span>Price</span>
-                                <input type="text" class="input-field" name="price" id="price" value="<%= item[0]['price'] %>"/>
+                                <input type="text" class="input-field" name="price" id="price" value="<%= item.first['price'] %>"/>
                             </label>
                             <label for="category"><span>Category</span><select name="category" class="select-field">
                                 <% categories.each do |category| %>
-                                    <option value="<%= category.id %>" <%= "selected" if category.id.eql?(item[0]['category_id']) %> >
+                                    <option value="<%= category.id %>" <%= "selected" if category.id.eql?(item.first['category_id']) %> >
                                         <%= category.name %>
                                     </option>
                                 <% end %>
                                 </select>
                             </label>
                             <label for="description"><span>Description</span>
-                                <textarea name="description" class="textarea-field"><%= item[0]['description'] %></textarea>
+                                <textarea name="description" class="textarea-field"><%= item.first['description'] %></textarea>
                             </label>
                             <div class="submit">
                                 <a href="/" class="btn"> Cancel</a>

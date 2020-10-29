@@ -56,3 +56,8 @@ def update_item(query)
                  category_id = #{query[:category_id]}, description = '#{query[:description]}' 
                  where id = #{query[:id]} ")    
 end
+
+def delete_food(id)
+    client = create_db_client
+    client.query("delete from item where id = #{id}")
+end

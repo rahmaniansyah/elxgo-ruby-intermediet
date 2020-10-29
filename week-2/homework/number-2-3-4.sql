@@ -24,7 +24,10 @@ create table item(
     id int not null auto_increment,
     name varchar(60),
     price int,
-    primary key (id)
+    category_id int,
+    description varchar(100),
+    primary key (id),
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 );
 
 -- describe item;
@@ -107,13 +110,13 @@ insert into customer (name, phone) values
 -- +----+--------+-----------------+
 
 -- insert into item --
-insert into item (name, price) values
-('Nasi goreng spesial','24000'),
-('Ayam geprek sambal','13000'),
-('Ayam kung pao','25000'),
-('Bakso semar tulang iga','28000'),
-('Air putih','2000'),
-('Jus jeruk','10000');
+insert into item (name, price, category_id) values
+('Nasi goreng spesial','24000',1),
+('Ayam geprek sambal','13000',1),
+('Ayam kung pao','25000',1),
+('Bakso semar tulang iga','28000',1),
+('Air putih','2000',2),
+('Jus jeruk','10000',2);
 
 -- select * from item;
 -- +----+------------------------+-------+
