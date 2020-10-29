@@ -1,7 +1,6 @@
 require 'sinatra'
 require './db_connector'
 
-
 # index page show list food
 get '/' do
     items = get_all_items
@@ -10,7 +9,7 @@ get '/' do
     }
 end
 
-# Route to create new food
+# Route to open create new food
 get '/new_food' do
     categories = get_all_categories
     erb :new_food, locals: {
@@ -28,9 +27,9 @@ post '/new_food' do
     }
 
     new_item = create_new_item(query)
-    
     if new_item
-        return "===== Menu #{params['name']} with price #{params['price']} added! ====="
+        message = "New Food successfully created!"
+        redirect "/success?message=#{message}"
     else
         redirect '/new_food'
     end
@@ -60,21 +59,35 @@ post '/edit_food' do
 
     edit_item = update_item(query)
 
-    redirect '/'
+    message = "Food successfully updated!"
+    redirect "/success?message=#{message}"
 end
 
 # Route to delete food
 get '/food/:id' do
     id = params["id"]
     delete = delete_food(id)
+
+    redirect '/'
 end
 
 # Route to open detail food
 get '/detail_food/:id' do
-    erb :detail_food
+    id = params["id"]
+
+    item = get_item(id)
+    category = get_category(item.first["category_id"]) if !item.first["category_id"].nil?
+    erb :detail_food, locals: {
+        item: item,
+        category: category
+    }
 end
 
 get '/success' do
-    erb :success
+    message = params['message'] if !params['message'].nil?
+
+    erb :success, locals: {
+        message: message
+    }
 end
 

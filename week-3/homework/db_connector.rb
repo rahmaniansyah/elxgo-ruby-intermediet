@@ -32,6 +32,14 @@ def get_item(id)
     item
 end
 
+def get_category(id)
+    client = create_db_client
+    raw_data = client.query("select name from categories where id = #{id}")
+    category = raw_data.to_a
+
+    category
+end
+
 def get_all_categories
     client = create_db_client
     raw_data = client.query("select * from categories")
@@ -46,8 +54,14 @@ end
 
 def create_new_item(query)
     client = create_db_client
+    last_count_records = client.query("select count(*) as count from item").to_a.first["count"].to_i
+    
     client.query("insert into item (name, price, category_id, description) values 
-                 ('#{query[:name]}','#{query[:price]}','#{query[:category_id]}','#{query[:description]}')")
+        ('#{query[:name]}','#{query[:price]}','#{query[:category_id]}','#{query[:description]}')")
+    
+    new_count_records = client.query("select count(*) as count from item").to_a.first["count"].to_i
+
+    last_count_records < new_count_records
 end
 
 def update_item(query)
