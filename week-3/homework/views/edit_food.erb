@@ -5,36 +5,39 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../style/index.css">
         <link rel="stylesheet" href="../style/form.css">
-        <title>elxgo - Create New Food</title>
+        <title>elxgo - Edit Food</title>
     </head>
     <body>
         <div class="container">
             <div class="card">
-                <h1 class="text-center">Create New Food</h1>
+                <h1 class="text-center">Edit Food</h1>
                 <hr>
                 <div class="card-body">
                     <div class="form-style-2">
-                        <form action="/new_food" method="post">
+                        <form action="/edit_food" method="post">
+                            <input type="hidden" id="id" name="id" value="<%= item[0]['id'] %>">
                             <label for="name">
                                 <span>Name</span>
-                                <input type="text" class="input-field" name="name" id="name" />
+                                <input type="text" class="input-field" name="name" id="name" value="<%= item[0]['name'] %>"/>
                             </label>
                             <label for="price">
                                 <span>Price</span>
-                                <input type="text" class="input-field" name="price" id="price" />
+                                <input type="text" class="input-field" name="price" id="price" value="<%= item[0]['price'] %>"/>
                             </label>
                             <label for="category"><span>Category</span><select name="category" class="select-field">
                                 <% categories.each do |category| %>
-                                    <option value="<%= category.id %>"><%= category.name %></option>
+                                    <option value="<%= category.id %>" <%= "selected" if category.id.eql?(item[0]['category_id']) %> >
+                                        <%= category.name %>
+                                    </option>
                                 <% end %>
                                 </select>
                             </label>
                             <label for="description"><span>Description</span>
-                                <textarea name="description" class="textarea-field"></textarea>
+                                <textarea name="description" class="textarea-field"><%= item[0]['description'] %></textarea>
                             </label>
                             <div class="submit">
                                 <a href="/" class="btn"> Cancel</a>
-                                <input type="submit" value="Add" />
+                                <input type="submit" value="update" />
                             </div>
                         </form>
                     </div>
