@@ -1,6 +1,7 @@
 require 'sinatra'
 require './models/item.rb'
 require './controllers/item_controller.rb'
+require './controllers/category_controller.rb'
 require './models/category.rb'
 
 # index page show list food
@@ -96,5 +97,20 @@ get '/success' do
     erb :success, locals: {
         message: message
     }
+end
+
+get '/list-category' do
+    controller = CategoryController.new
+    controller.index
+end
+
+get '/new-category' do
+    controller = CategoryController.new
+    controller.page_create_category
+end
+
+post '/add-category' do
+    controller = CategoryController.new
+    controller.create_category(params)
 end
 

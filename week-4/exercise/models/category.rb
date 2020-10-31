@@ -3,7 +3,7 @@ require './db/mysql_connector.rb'
 class Category
     attr_accessor :name, :id
 
-    def initialize (name, id)
+    def initialize (name, id = nil)
         @name = name
         @id = id
     
@@ -27,5 +27,18 @@ class Category
         end
     
         categories
+    end
+
+    def save
+        # return false unless valid?
+        puts '---------'
+        puts name
+        puts '---------'
+        client = create_db_client
+        client.query("insert into categories (name) values ('#{name}')")
+    end
+
+    def valid?
+        return false if @name.nil?
     end
 end
