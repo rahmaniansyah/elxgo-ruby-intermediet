@@ -1,9 +1,10 @@
 require 'sinatra'
-require './db_connector'
+require './models/item.rb'
+require './models/category.rb'
 
 # index page show list food
 get '/' do
-    items = get_all_items
+    items = Item.get_all_items
     erb :index, locals: {
         items: items
     }
@@ -11,7 +12,7 @@ end
 
 # Route to open create new food
 get '/new_food' do
-    categories = get_all_categories
+    categories = Category.get_all_categories
     erb :new_food, locals: {
         categories: categories
     }
@@ -26,7 +27,7 @@ post '/new_food' do
         description: params['description']
     }
 
-    new_item = create_new_item(query)
+    new_item = Item.create_new_item(query)
     if new_item
         message = "New Food successfully created!"
         redirect "/success?message=#{message}"
@@ -39,8 +40,8 @@ end
 get '/edit_food/:id' do
     id = params["id"]
 
-    categories = get_all_categories
-    item = get_item(id)
+    categories = Category.get_all_categories
+    item = Item.get_item(id)
     erb :edit_food, locals: {
         item: item,
         categories: categories
@@ -57,7 +58,7 @@ post '/edit_food' do
         description: params['description']
     }
 
-    edit_item = update_item(query)
+    edit_item = Item.update_item(query)
 
     message = "Food successfully updated!"
     redirect "/success?message=#{message}"
@@ -66,7 +67,7 @@ end
 # Route to delete food
 get '/food/:id' do
     id = params["id"]
-    delete = delete_food(id)
+    delete = Item.delete_food(id)
 
     redirect '/'
 end
@@ -75,8 +76,8 @@ end
 get '/detail_food/:id' do
     id = params["id"]
 
-    item = get_item(id)
-    category = get_category(item.first["category_id"]) if !item.first["category_id"].nil?
+    item = Item.get_item(id)
+    category = Category.get_category(item.first["category_id"]) if !item.first["category_id"].nil?
     erb :detail_food, locals: {
         item: item,
         category: category
