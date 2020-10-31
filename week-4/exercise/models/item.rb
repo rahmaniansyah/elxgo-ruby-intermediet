@@ -3,10 +3,9 @@ require './db/mysql_connector.rb'
 class Item
     attr_accessor :name, :price, :id, :category_id, :description
 
-    def initialize (name, price, id, category_id = nil, description = nil)
+    def initialize (name, price, category_id = nil, description = nil)
         @name = name
         @price = price
-        @id = id
         @category_id = category_id
         @description = description
     
@@ -17,7 +16,7 @@ class Item
         raw_data = client.query("select * from item")
         items = Array.new
         raw_data.each do |data|
-            item = Item.new(data["name"], data["price"], data["id"], data["category_id"], data["description"])
+            item = Item.new(data["name"], data["price"], data["category_id"], data["description"])
             items.push(item)
         end
     
@@ -31,6 +30,21 @@ class Item
         
         item
     end
+
+    # -------------------------------
+    def save
+        return false unless valid?
+
+        client = create_db_client
+        client.query("insert into item (name, price, category_id, description) values 
+            ('#{name}','#{price}','#{category_id}','#{description}')")
+    end
+
+    def valid?
+        return false if @name.nil?
+        return false if @price.nil?
+    end
+    # -------------------------------
 
     def self.create_new_item(query)
         client = create_db_client

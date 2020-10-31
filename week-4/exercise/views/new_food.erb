@@ -23,7 +23,7 @@
                                 <span>Price <span class="required">*</span></span>
                                 <input type="text" class="input-field" name="price" id="price" />
                             </label>
-                            <label for="category"><span>Category</span><select name="category" class="select-field">
+                            <label for="category"><span>Category</span><select name="category_id" class="select-field">
                                 <% categories.each do |category| %>
                                     <option value="<%= category.id %>"><%= category.name %></option>
                                 <% end %>

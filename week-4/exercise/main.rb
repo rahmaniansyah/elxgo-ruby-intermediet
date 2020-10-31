@@ -1,13 +1,16 @@
 require 'sinatra'
 require './models/item.rb'
+require './controllers/item_controller.rb'
 require './models/category.rb'
 
 # index page show list food
 get '/' do
-    items = Item.get_all_items
-    erb :index, locals: {
-        items: items
-    }
+    # items = Item.get_all_items
+    # erb :index, locals: {
+    #     items: items
+    # }
+    item_controller = ItemController.new
+    item_controller.show_list
 end
 
 # Route to open create new food
@@ -20,20 +23,23 @@ end
 
 # Route to process the created food
 post '/new_food' do
-    query = {
-        name: params['name'],
-        price: params['price'],
-        category_id: params['category'],
-        description: params['description']
-    }
+    # query = {
+    #     name: params['name'],
+    #     price: params['price'],
+    #     category_id: params['category'],
+    #     description: params['description']
+    # }
 
-    new_item = Item.create_new_item(query)
-    if new_item
-        message = "New Food successfully created!"
-        redirect "/success?message=#{message}"
-    else
-        redirect '/new_food'
-    end
+    # new_item = Item.create_new_item(query)
+    # if new_item
+    #     message = "New Food successfully created!"
+    #     redirect "/success?message=#{message}"
+    # else
+    #     redirect '/new_food'
+    # end
+
+    item_controller = ItemController.new
+    item_controller.create_food(params)
 end
 
 # Route to update selected food
