@@ -80,7 +80,13 @@ create table orderDetails(
 -- | quantity | int  | YES  |     | NULL    |                |
 -- +----------+------+------+-----+---------+----------------+
 
-
+-- User tabel for admin information --
+create table users(
+    id int not null auto_increment,
+    password CHAR(128),
+    email varchar(60),
+    primary key (id)
+);
 
 
 
