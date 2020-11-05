@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>elxgo - List Category</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1 class="text-center">Category</h1>
+            <hr>
+            <div class="card-body">
+                <table class="table-styled">
+                    <tbody>
+                        <tr>
+                            <td><a href="/new-category" class="btn"> + add category</a></td>
+                        </tr>
+                    <% categories.each do |category| %>
+                        <tr>
+                            <td class="td-name">
+                                <div class="title"><%= category.name %></div>
+                            </td>
+                            <td><a href="/edit_food/<%= category.id %>" class="btn"><i class="fa fa-edit"></i></a></td>
+                            <td><a href="/food/<%= category.id %>" class="btn"><i class="fa fa-trash"></i></a></td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+    <%# <a href='https://www.freepik.com/photos/background'>Background photo created by freepik - www.freepik.com</a> %>
+</footer>
+</html>
