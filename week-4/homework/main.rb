@@ -7,36 +7,19 @@ require './models/category.rb'
 # index page show list food
 get '/menu' do
     item_controller = ItemController.new
-    item_controller.show_list
+    item_controller.index
 end
 
 # Route to open create new food
-get '/new_food' do
-    categories = Category.get_all_categories
-    erb :new_food, locals: {
-        categories: categories
-    }
+get '/menu/create' do
+    item_controller = ItemController.new
+    item_controller.view_create
 end
 
 # Route to process the created food
-post '/new_food' do
-    # query = {
-    #     name: params['name'],
-    #     price: params['price'],
-    #     category_id: params['category'],
-    #     description: params['description']
-    # }
-
-    # new_item = Item.create_new_item(query)
-    # if new_item
-    #     message = "New Food successfully created!"
-    #     redirect "/success?message=#{message}"
-    # else
-    #     redirect '/new_food'
-    # end
-
+post '/menu/create' do
     item_controller = ItemController.new
-    item_controller.create_food(params)
+    item_controller.create(params)
 end
 
 # Route to update selected food
@@ -90,7 +73,7 @@ get '/success' do
     }
 end
 
-get '/list-category' do
+get '/category' do
     controller = CategoryController.new
     controller.index
 end

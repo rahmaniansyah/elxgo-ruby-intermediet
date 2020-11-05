@@ -1,12 +1,13 @@
 require './db/mysql_connector.rb'
 
 class Item
-    attr_accessor :name, :price, :id, :description
+    attr_accessor :name, :price, :id, :category_id, :description
 
-    def initialize (name, price, id, description = nil)
+    def initialize (name, price, id, category_id = nil, description = nil)
         @name = name
         @price = price
         @id = id
+        @category_id = category_id
         @description = description
     
     end
@@ -16,7 +17,7 @@ class Item
         raw_data = client.query("select * from item")
         items = Array.new
         raw_data.each do |data|
-            item = Item.new(data["name"], data["price"], data["id"], data["description"])
+            item = Item.new(data["name"], data["price"], data["id"], data["category_id"], data["description"])
             items.push(item)
         end
     
@@ -33,11 +34,41 @@ class Item
 
     # -------------------------------
     def save
-        return false unless valid?
-
+        return false if valid?
+        
         client = create_db_client
-        client.query("insert into item (name, price, category_id, description) values 
-            ('#{name}','#{price}','#{category_id}','#{description}')")
+        last_id = get_id
+
+        # create new item
+        client.query("insert into item (name, price, description) values 
+            ('#{name}','#{price}','#{description}')")
+
+        current_id = get_id
+        puts '--category--'
+        puts category_id
+        puts '-----'
+
+        if last_id < current_id
+            # create record to save category id on item
+            create_item_categories_record(current_id, category_id)
+
+            return true
+        else
+
+            return false
+        end
+    end
+
+    def get_id
+        client = create_db_client
+        id = client.query("SELECT id FROM item ORDER BY id DESC LIMIT 1;")
+        id = id.first["id"]
+    end
+
+    def create_item_categories_record(item_id, category_id)
+        client = create_db_client
+        record = client.query("insert into itemCategories (item_id, category_id) values 
+                ('#{item_id}','#{category_id}')")
     end
 
     def valid?
