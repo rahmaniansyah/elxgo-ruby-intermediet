@@ -94,3 +94,14 @@ footer a{
     text-decoration: none;
     color: black;
 }
+
+.menu{
+    padding: 5px 34px;
+}
+
+.menu a{
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    padding-right: 3em;
+}
