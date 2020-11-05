@@ -88,6 +88,32 @@ create table users(
     primary key (id)
 );
 
+-- add categories table
+create table categories(
+    id int not null auto_increment,
+    name varchar(50),
+    primary key (id)
+);
+
+-- add relation table from item and categories
+create table itemCategories(
+    id INT NOT NULL auto_increment,
+    item_id INT,
+    category_id INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (item_id) REFERENCES item (id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE CASCADE
+);
+
+-- insert into itemCategories (category_id,  item_id) values
+-- (1,1),
+-- (1,3),
+-- (1,4),
+-- (2,5),
+-- (2,7),
+-- (1,20),
+-- (3,22),
+-- (2,23);
 
 
 -------------------------------------------------------
