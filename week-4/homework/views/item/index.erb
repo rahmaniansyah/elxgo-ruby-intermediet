@@ -23,6 +23,7 @@
                         <tr>
                             <td><a href="/new_food" class="btn"> + New Food</a></td>
                         </tr>
+                        <%= puts items.each %>
                     <% items.each do |item| %>
                         <tr>
                             <td class="td-name">
@@ -31,7 +32,7 @@
                                     <%= item.description.nil? ? "Tidak ada deskripsi" : item.description %>
                                 </div>
                                 <div class="detail">
-                                    <a href="/detail_food/<%= item.id %>">View Detail</a>
+                                    <a href="/menu/<%= item.id %>/show">View Detail</a>
                                 </div>
                             </td>
                             <td><a href="/edit_food/<%= item.id %>" class="btn"><i class="fa fa-edit"></i></a></td>

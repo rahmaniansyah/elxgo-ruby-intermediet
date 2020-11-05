@@ -5,11 +5,7 @@ require './controllers/category_controller.rb'
 require './models/category.rb'
 
 # index page show list food
-get '/' do
-    # items = Item.get_all_items
-    # erb :index, locals: {
-    #     items: items
-    # }
+get '/menu' do
     item_controller = ItemController.new
     item_controller.show_list
 end
@@ -80,15 +76,10 @@ get '/food/:id' do
 end
 
 # Route to open detail food
-get '/detail_food/:id' do
+get '/menu/:id/show' do
     id = params["id"]
-
-    item = Item.get_item(id)
-    category = Category.get_category(item.first["category_id"]) if !item.first["category_id"].nil?
-    erb :detail_food, locals: {
-        item: item,
-        category: category
-    }
+    item_controller = ItemController.new
+    item_controller.show(id)
 end
 
 get '/success' do

@@ -1,12 +1,12 @@
 require './db/mysql_connector.rb'
 
 class Item
-    attr_accessor :name, :price, :id, :category_id, :description
+    attr_accessor :name, :price, :id, :description
 
-    def initialize (name, price, category_id = nil, description = nil)
+    def initialize (name, price, id, description = nil)
         @name = name
         @price = price
-        @category_id = category_id
+        @id = id
         @description = description
     
     end
@@ -16,7 +16,7 @@ class Item
         raw_data = client.query("select * from item")
         items = Array.new
         raw_data.each do |data|
-            item = Item.new(data["name"], data["price"], data["category_id"], data["description"])
+            item = Item.new(data["name"], data["price"], data["id"], data["description"])
             items.push(item)
         end
     
