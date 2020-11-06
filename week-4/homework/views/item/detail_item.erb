@@ -15,7 +15,7 @@
                     <table>
                         <tr>
                             <td>
-                                <a href="/" class="btn"> BACK </a>
+                                <a href="/menu" class="btn"> BACK </a>
                             </td>
                         </tr>
                         <tr>
@@ -29,7 +29,7 @@
                         </tr>
                         <tr>
                             <td>Category</td>
-                            <td>: <%= category.first["name"] if !category.nil? %></td>
+                            <td>: <%= category.first["category"] if !category.empty? %></td>
                         </tr>
                         <tr>
                             <td>Description</td>

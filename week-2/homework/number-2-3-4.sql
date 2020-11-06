@@ -254,6 +254,9 @@ select item.name, itemCategories.category_id, itemCategories.item_id
 from item
 right join itemCategories on item.id = itemCategories.item_id;
 
-select item.name, itemOnCategories.category_id
-from item group by item.name
-left join itemOnCategories on item.id = itemOnCategories.item_id
+-- Create view display item and categories belongs to item
+create view categoriesOnItem_view as
+select itemOnCategories.item_id, itemOnCategories.name, group_concat(categories.name separator ', ') as category
+from itemOnCategories
+left join categories on itemOnCategories.category_id = categories.id
+group by itemOnCategories.item_id;

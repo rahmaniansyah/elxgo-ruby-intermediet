@@ -24,7 +24,7 @@ class CategoryController
     end
 
     def page_create_category
-        renderer = ERB.new(File.read("./views/new_category.erb"))
+        renderer = ERB.new(File.read("./views/category/create_category.erb"))
         renderer.result(binding) 
     end
     
@@ -32,7 +32,7 @@ class CategoryController
         category = Category.new(params["name"])
         category.save
 
-        message = "New Food successfully created!"
+        message = "New Category successfully created!"
         renderer = ERB.new(File.read("./views/success.erb"))
         renderer.result(binding)
     end

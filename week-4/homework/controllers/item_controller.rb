@@ -50,7 +50,7 @@ class ItemController
 
     def show(id)
         item = Item.get_item(id)
-        category = Category.get_category(item.first["category_id"]) if !item.first["category_id"].nil?
+        category = Item.get_item_category(id)
         
         ERB.new(File.read("./views/item/detail_item.erb")).result(binding)
     end

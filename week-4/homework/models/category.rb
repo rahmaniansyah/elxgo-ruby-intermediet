@@ -3,10 +3,10 @@ require './db/mysql_connector.rb'
 class Category
     attr_accessor :name, :id
 
-    def initialize (name, id = nil)
+    def initialize (name, id = nil, item = nil)
         @name = name
         @id = id
-    
+        @items = []
     end
 
     def self.get_category(id)

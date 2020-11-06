@@ -7,7 +7,7 @@ class Item
         @name = name
         @price = price
         @id = id
-        @category_id = category_id
+        @categories = []
         @description = description
     
     end
@@ -30,6 +30,14 @@ class Item
         item = raw_data.to_a
         
         item
+    end
+
+    def self.get_item_category(id)
+        client = create_db_client
+        raw_data = client.query("select category from categoriesOnItem_view where item_id = #{id}")
+        category = raw_data.to_a
+        
+        category
     end
 
     def save
