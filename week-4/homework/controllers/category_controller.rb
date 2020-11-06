@@ -48,4 +48,12 @@ class CategoryController
         renderer = ERB.new(File.read("./views/success.erb"))
         renderer.result(binding)
     end
+
+    def delete(id)
+        category = Category.new(nil, id)
+        category.delete
+
+        message = "Successfully delete item!"
+        ERB.new(File.read("./views/success.erb")).result(binding)
+    end
 end

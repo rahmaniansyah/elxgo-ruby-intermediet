@@ -89,6 +89,12 @@ post '/category/:id/update' do
     controller.update(params)
 end
 
+get '/category/:id/delete' do
+    id = params["id"]
+    controller = CategoryController.new
+    controller.delete(id)
+end
+
 get '/new-category' do
     controller = CategoryController.new
     controller.page_create_category

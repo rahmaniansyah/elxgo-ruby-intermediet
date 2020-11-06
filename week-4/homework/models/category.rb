@@ -43,9 +43,6 @@ class Category
 
     def save
         # return false unless valid?
-        puts '---------'
-        puts name
-        puts '---------'
         client = create_db_client
         client.query("insert into categories (name) values ('#{name}')")
     end
@@ -53,6 +50,15 @@ class Category
     def update
         client = create_db_client
         client.query("update categories set name = '#{name}' where id = #{id} ")
+    end
+
+    def delete
+        client = create_db_client
+        client.query("delete from categories where id = #{id}")
+
+        # record = self.get_category(id)
+        
+        # record.empty?
     end
 
     def valid?
