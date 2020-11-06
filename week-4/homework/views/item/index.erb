@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/index.css">
+    <link rel="stylesheet" href="../../style/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>elxgo - Menu</title>
 </head>
@@ -35,7 +35,7 @@
                                     <a href="/menu/<%= item.id %>/show">View Detail</a>
                                 </div>
                             </td>
-                            <td><a href="/edit_food/<%= item.id %>" class="btn"><i class="fa fa-edit"></i></a></td>
+                            <td><a href="/menu/<%= item.id %>/edit" class="btn"><i class="fa fa-edit"></i></a></td>
                             <td><a  class="btn" onclick="deleteConfirmation(<%= item.id %>)"><i class="fa fa-trash"></i></a></td>
                             <td class="td-price">Rp. <%= item.price %></td>
                         </tr>

@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../style/index.css">
-        <link rel="stylesheet" href="../style/form.css">
+        <link rel="stylesheet" href="../../style/index.css">
+        <link rel="stylesheet" href="../../style/form.css">
         <title>elxgo - Edit Food</title>
     </head>
     <body>
@@ -14,7 +14,7 @@
                 <hr>
                 <div class="card-body">
                     <div class="form-style-2">
-                        <form action="/edit_food" method="post">
+                        <form action="/update" method="post">
                             <input type="hidden" id="id" name="id" value="<%= item.first['id'] %>">
                             <label for="name">
                                 <span>Name</span>

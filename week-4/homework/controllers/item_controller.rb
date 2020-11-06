@@ -29,6 +29,25 @@ class ItemController
         renderer.result(binding)
     end
 
+    def view_update(id)
+        categories = Category.get_all_categories
+        item = Item.get_item(id)
+
+        ERB.new(File.read("./views/item/edit_item.erb")).result(binding)
+    end
+
+    def update(params)
+        # edit_item = Item.update_item(query)
+        item = Item.new(
+            params['name'], params['price'], params['id'], params['category_id'], params['description']
+        )
+
+        item.update
+
+        message = "Successfully update item!"
+        ERB.new(File.read("./views/success.erb")).result(binding)
+    end
+
     def show(id)
         item = Item.get_item(id)
         category = Category.get_category(item.first["category_id"]) if !item.first["category_id"].nil?

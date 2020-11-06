@@ -32,7 +32,6 @@ class Item
         item
     end
 
-    # -------------------------------
     def save
         return false if valid?
         
@@ -59,6 +58,12 @@ class Item
         end
     end
 
+    def update
+        client = create_db_client
+        client.query("update item set name = '#{name}', price = '#{price}', 
+                     description = '#{description}' where id = #{id} ")
+    end
+
     def get_id
         client = create_db_client
         id = client.query("SELECT id FROM item ORDER BY id DESC LIMIT 1;")
@@ -77,19 +82,7 @@ class Item
     end
     # -------------------------------
 
-    def self.create_new_item(query)
-        client = create_db_client
-        last_count_records = client.query("select count(*) as count from item").to_a.first["count"].to_i
-        
-        client.query("insert into item (name, price, category_id, description) values 
-            ('#{query[:name]}','#{query[:price]}','#{query[:category_id]}','#{query[:description]}')")
-        
-        new_count_records = client.query("select count(*) as count from item").to_a.first["count"].to_i
-    
-        last_count_records < new_count_records
-    end
-    
-    def self.update_item(query)
+   def self.update_item(query)
         client = create_db_client
         client.query("update item set name = '#{query[:name]}', price = #{query[:price]}, 
                      category_id = #{query[:category_id]}, description = '#{query[:description]}' 
