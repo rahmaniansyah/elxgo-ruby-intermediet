@@ -19,10 +19,7 @@ class Category
 
     def self.get_items_on_category(id)
         client = create_db_client
-        raw_data = client.query("select item.name
-                                from itemCategories
-                                inner join item on itemCategories.item_id = item.id
-                                where itemCategories.category_id = #{id};")
+        raw_data = client.query("select * from itemOnCategories where category_id = #{id};")
         items = Array.new
         raw_data.each do |data|
             item = Item.new(data["name"], nil, nil, nil)

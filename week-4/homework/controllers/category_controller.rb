@@ -1,4 +1,5 @@
 require './models/category.rb'
+require './models/item.rb'
 
 class CategoryController
     
@@ -13,6 +14,13 @@ class CategoryController
         category = Category.get_category(id)
         ERB.new(File.read("./views/category/detail_category.erb")).result(binding)
 
+    end
+
+    def assign(id)
+        items = Item.get_all_items
+        category = Category.get_category(id)
+        items_category = Category.get_items_on_category
+        ERB.new(File.read("./views/category/assign_category.erb")).result(binding)
     end
 
     def page_create_category

@@ -71,6 +71,12 @@ get '/category/:id/show' do
     controller.show(id)
 end
 
+get '/category/:id/assign' do
+    id = params["id"]
+    controller = CategoryController.new
+    controller.assign(id)
+end
+
 get '/new-category' do
     controller = CategoryController.new
     controller.page_create_category

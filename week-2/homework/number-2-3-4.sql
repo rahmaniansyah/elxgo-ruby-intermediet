@@ -249,7 +249,11 @@ group by orderDetails.order_id;
 -- +----------+------------+---------------+-----------------+-------+-----------------------------------------+
 
 -- Display items belongs to categories
-select item.name
-from itemCategories
-inner join item on itemCategories.item_id = item.id
-where itemCategories.category_id = 1;
+create view itemOnCategories as
+select item.name, itemCategories.category_id, itemCategories.item_id
+from item
+right join itemCategories on item.id = itemCategories.item_id;
+
+select item.name, itemOnCategories.category_id
+from item group by item.name
+left join itemOnCategories on item.id = itemOnCategories.item_id
