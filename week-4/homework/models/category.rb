@@ -50,6 +50,11 @@ class Category
         client.query("insert into categories (name) values ('#{name}')")
     end
 
+    def update
+        client = create_db_client
+        client.query("update categories set name = '#{name}' where id = #{id} ")
+    end
+
     def valid?
         return false if @name.nil?
     end

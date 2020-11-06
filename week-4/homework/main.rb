@@ -77,6 +77,18 @@ get '/category/:id/assign' do
     controller.assign(id)
 end
 
+get '/category/:id/edit' do
+    id = params["id"]
+    controller = CategoryController.new
+    controller.view_update(id)
+end
+
+post '/category/:id/update' do
+    id = params["id"]
+    controller = CategoryController.new
+    controller.update(params)
+end
+
 get '/new-category' do
     controller = CategoryController.new
     controller.page_create_category
