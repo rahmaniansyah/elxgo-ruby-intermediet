@@ -35,4 +35,14 @@ class ItemController
         
         ERB.new(File.read("./views/item/detail_item.erb")).result(binding)
     end
+
+    def delete(id)
+        delete = Item.delete_item(id)
+        if delete
+            message = "Successfully delete item!"
+        else
+            message = "Something went wrong!"
+        end
+        ERB.new(File.read("./views/success.erb")).result(binding)
+    end
 end

@@ -96,8 +96,12 @@ class Item
                      where id = #{query[:id]} ")    
     end
 
-    def self.delete_food(id)
+    def self.delete_item(id)
         client = create_db_client
         client.query("delete from item where id = #{id}")
+
+        record = self.get_item(id)
+        
+        record.empty?
     end
 end

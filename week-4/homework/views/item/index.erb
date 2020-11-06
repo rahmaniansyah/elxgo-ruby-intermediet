@@ -36,7 +36,7 @@
                                 </div>
                             </td>
                             <td><a href="/edit_food/<%= item.id %>" class="btn"><i class="fa fa-edit"></i></a></td>
-                            <td><a href="/food/<%= item.id %>" class="btn"><i class="fa fa-trash"></i></a></td>
+                            <td><a  class="btn" onclick="deleteConfirmation(<%= item.id %>)"><i class="fa fa-trash"></i></a></td>
                             <td class="td-price">Rp. <%= item.price %></td>
                         </tr>
                     <% end %>
@@ -46,6 +46,15 @@
         </div>
     </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function deleteConfirmation(id) {
+        if (confirm("Are you sure?")) {
+            window.location.replace('/menu/'+id+'/delete');
+        }
+        return false;
+    }
+</script>
 <footer>
     <%# <a href='https://www.freepik.com/photos/background'>Background photo created by freepik - www.freepik.com</a> %>
 </footer>

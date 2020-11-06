@@ -51,11 +51,13 @@ post '/edit_food' do
 end
 
 # Route to delete food
-get '/food/:id' do
+get '/menu/:id/delete' do
     id = params["id"]
-    delete = Item.delete_food(id)
+    item_controller = ItemController.new
+    item_controller.delete(id)
+    # 
 
-    redirect '/'
+    # redirect '/menu'
 end
 
 # Route to open detail food
