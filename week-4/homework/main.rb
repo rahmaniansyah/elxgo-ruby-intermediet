@@ -33,18 +33,6 @@ end
 post '/update' do
     item_controller = ItemController.new
     item_controller.update(params)
-    # query = {
-    #     id: params['id'],
-    #     name: params['name'],
-    #     price: params['price'],
-    #     category_id: params['category'],
-    #     description: params['description']
-    # }
-
-    # edit_item = Item.update_item(query)
-
-    # message = "Food successfully updated!"
-    # redirect "/success?message=#{message}"
 end
 
 # Route to delete food
@@ -75,6 +63,12 @@ end
 get '/category' do
     controller = CategoryController.new
     controller.index
+end
+
+get '/category/:id/show' do
+    id = params["id"]
+    controller = CategoryController.new
+    controller.show(id)
 end
 
 get '/new-category' do

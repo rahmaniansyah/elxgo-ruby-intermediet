@@ -105,3 +105,26 @@ footer a{
     font-weight: 600;
     padding-right: 3em;
 }
+
+.category{
+    padding-left: 16px;
+}
+
+.category .category-header{
+    display: flex;
+}
+
+.category .category-header .title{
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 0;
+}
+
+.category .category-header .action{
+    vertical-align: middle;
+}
+
+.category-body ul li{
+    font-weight: 300;
+    padding-bottom: .5em;
+}

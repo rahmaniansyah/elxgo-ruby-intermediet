@@ -247,3 +247,9 @@ group by orderDetails.order_id;
 -- |        5 | 2020-10-16 | Dummy3        | +62838322323902 | 23000 | Ayam geprek sambal, Jus jeruk           |
 -- |        6 | 2020-10-15 | Dummy4        | +62838322323903 | 53000 | Ayam kung pao, Bakso semar tulang iga   |
 -- +----------+------------+---------------+-----------------+-------+-----------------------------------------+
+
+-- Display items belongs to categories
+select item.name
+from itemCategories
+inner join item on itemCategories.item_id = item.id
+where itemCategories.category_id = 1;

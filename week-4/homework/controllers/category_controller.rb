@@ -4,8 +4,15 @@ class CategoryController
     
     def index
         categories = Category.get_all_categories
-        renderer = ERB.new(File.read("./views/category_view.erb"))
+        renderer = ERB.new(File.read("./views/category/index.erb"))
         renderer.result(binding)     
+    end
+
+    def show(id)
+        items = Category.get_items_on_category(id)
+        category = Category.get_category(id)
+        ERB.new(File.read("./views/category/detail_category.erb")).result(binding)
+
     end
 
     def page_create_category

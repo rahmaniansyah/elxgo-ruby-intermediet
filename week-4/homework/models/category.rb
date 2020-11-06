@@ -11,10 +11,25 @@ class Category
 
     def self.get_category(id)
         client = create_db_client
-        raw_data = client.query("select name from categories where id = #{id}")
+        raw_data = client.query("select * from categories where id = #{id}")
         category = raw_data.to_a
     
         category
+    end
+
+    def self.get_items_on_category(id)
+        client = create_db_client
+        raw_data = client.query("select item.name
+                                from itemCategories
+                                inner join item on itemCategories.item_id = item.id
+                                where itemCategories.category_id = #{id};")
+        items = Array.new
+        raw_data.each do |data|
+            item = Item.new(data["name"], nil, nil, nil)
+            items.push(item)
+        end
+
+        items
     end
 
     def self.get_all_categories
