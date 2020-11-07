@@ -1,0 +1,12 @@
+# Gemfile to see installed gem within the application
+
+source 'https://rubygems.org'
+
+# Ruby sinatra
+gem 'sinatra'
+
+# Restarts your app when a file changes
+gem 'rerun'
+
+# Database used within application
+gem 'mysql2'

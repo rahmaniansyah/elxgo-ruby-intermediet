@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../../style/index.css">
+        <title>elxgo - Detail Food</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="card">
+                <h1 class="text-center"><%= item.first["name"].upcase %></h1>
+                <hr>
+                <div class="card-body">
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="/menu" class="btn"> BACK </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td rowspan="6">
+                                <%# <img class="img" src="http://i3.ytimg.com/vi/ksDq2kwYjNs/maxresdefault.jpg" alt="Ayam_Kung_Pao_by_Devina_Hermawan"> %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Price</td>
+                            <td>: Rp. <%= item.first["price"] %></td>
+                        </tr>
+                        <tr>
+                            <td>Category</td>
+                            <td>: <%= category.first["category"] if !category.empty? %></td>
+                        </tr>
+                        <tr>
+                            <td>Description</td>
+                            <td>: <%= item.first["description"] %></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+    <footer>
+        <a href='https://www.freepik.com/photos/background'>Background photo created by freepik - www.freepik.com</a>
+    </footer>
+</html>
