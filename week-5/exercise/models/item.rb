@@ -41,29 +41,28 @@ class Item
     end
 
     def save
-        return false if valid?
+        # return false if valid?
         
         client = create_db_client
-        last_id = get_id
+        # last_id = get_id.empty? ? 0 : get_id
+
+        # return get_id
 
         # create new item
         client.query("insert into item (name, price, description) values 
             ('#{name}','#{price}','#{description}')")
 
-        current_id = get_id
-        puts '--category--'
-        puts category_id
-        puts '-----'
+        # current_id = get_id
+        
+        # if last_id < current_id
+        #     # create record to save category id on item
+        #     # create_item_categories_record(current_id, category_id)
 
-        if last_id < current_id
-            # create record to save category id on item
-            create_item_categories_record(current_id, category_id)
+        #     return true
+        # else
 
-            return true
-        else
-
-            return false
-        end
+        #     return false
+        # end
     end
 
     def update
@@ -74,7 +73,7 @@ class Item
 
     def get_id
         client = create_db_client
-        id = client.query("SELECT id FROM item ORDER BY id DESC LIMIT 1;")
+        id = client.query("SELECT name FROM item ORDER BY id DESC LIMIT 1;")
         id = id.first["id"]
     end
 
@@ -87,6 +86,8 @@ class Item
     def valid?
         return false if @name.nil?
         return false if @price.nil?
+
+        return true
     end
     # -------------------------------
 

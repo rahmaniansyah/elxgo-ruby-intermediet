@@ -10,3 +10,6 @@ gem 'rerun'
 
 # Database used within application
 gem 'mysql2'
+
+# Unit test gem for ruby
+gem 'rspec'
