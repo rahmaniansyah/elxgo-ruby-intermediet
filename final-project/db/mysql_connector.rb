@@ -7,7 +7,7 @@ def create_db_client
         # :password => ENV["DB_PASSWORD"],
         # :database => ENV["DB_NAME"]
         :password => '1305438asep',
-        :database => 'food_oms_test_db'
+        :database => 'food_db'
     )
     client
 end

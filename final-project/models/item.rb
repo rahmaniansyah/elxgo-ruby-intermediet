@@ -1,9 +1,9 @@
 require './db/mysql_connector.rb'
 
 class Item
-    attr_accessor :name, :price, :id, :category_id, :description
+    attr_accessor :name, :price, :id, :categories, :description
 
-    def initialize (name, price, id, category_id = nil, description = nil)
+    def initialize (name, price, id, categories = nil, description = nil)
         @name = name
         @price = price
         @id = id
@@ -12,12 +12,12 @@ class Item
     
     end
 
-    def self.get_all_items
+    def self.all
         client = create_db_client
-        raw_data = client.query("select * from item")
+        raw_data = client.query("select * from items")
         items = Array.new
         raw_data.each do |data|
-            item = Item.new(data["name"], data["price"], data["id"], data["category_id"], data["description"])
+            item = Item.new(data["name"], data["price"], data["id"], data["description"])
             items.push(item)
         end
     

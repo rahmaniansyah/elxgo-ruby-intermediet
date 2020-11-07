@@ -2,7 +2,7 @@ require './models/item.rb'
 
 class ItemController
     def index
-        items = Item.get_all_items
+        items = Item.all
         
         ERB.new(File.read("./views/item/index.erb")).result(binding)
     end
