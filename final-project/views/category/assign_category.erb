@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../../style/index.css">
+        <link rel="stylesheet" href="../../style/form.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>elxgo - Assign Category</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="card">
+                <h1 class="text-center">CATEGORY</h1>
+                <hr>
+                    <div class="menu">
+                        <a href="/menu"> Menu</a>
+                        <a href="/category"> Category</a>
+                    </div>
+                <hr>
+                <div class="card-body">
+                    <div class="category">
+                        <div class="category-header">
+                            <span class="title"><%= category.first["name"] %></span>
+                        </div>
+                        <div class="category-body">
+                            <div class="form-style-2">
+                                <h3>List of item</h3>
+                                <form>
+                                    <% items.each do |item| %>
+                                        <input type="checkbox" name="category_id[]" value="<%= item.id %>"><%= item.name %><br/>
+                                    <% end %>
+                                    <div class="submit">
+                                        <a href="/" class="btn"> Cancel</a>
+                                        <input type="submit" value="Update" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <footer>
+        <a href='https://www.freepik.com/photos/background'>Background photo created by freepik - www.freepik.com</a>
+    </footer>
+</html>

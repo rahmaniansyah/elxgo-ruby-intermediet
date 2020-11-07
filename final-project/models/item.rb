@@ -1,0 +1,109 @@
+require './db/mysql_connector.rb'
+
+class Item
+    attr_accessor :name, :price, :id, :category_id, :description
+
+    def initialize (name, price, id, category_id = nil, description = nil)
+        @name = name
+        @price = price
+        @id = id
+        @categories = []
+        @description = description
+    
+    end
+
+    def self.get_all_items
+        client = create_db_client
+        raw_data = client.query("select * from item")
+        items = Array.new
+        raw_data.each do |data|
+            item = Item.new(data["name"], data["price"], data["id"], data["category_id"], data["description"])
+            items.push(item)
+        end
+    
+        items
+    end
+    
+    def self.get_item(id)
+        client = create_db_client
+        raw_data = client.query("select * from item where id = #{id}")
+        item = raw_data.to_a
+        
+        item
+    end
+
+    def self.get_item_category(id)
+        client = create_db_client
+        raw_data = client.query("select category from categoriesOnItem_view where item_id = #{id}")
+        category = raw_data.to_a
+        
+        category
+    end
+
+    def save
+        # return false if valid?
+        
+        client = create_db_client
+        # last_id = get_id.empty? ? 0 : get_id
+
+        # return get_id
+
+        # create new item
+        client.query("insert into item (name, price, description) values 
+            ('#{name}','#{price}','#{description}')")
+
+        # current_id = get_id
+        
+        # if last_id < current_id
+        #     # create record to save category id on item
+        #     # create_item_categories_record(current_id, category_id)
+
+        #     return true
+        # else
+
+        #     return false
+        # end
+    end
+
+    def update
+        client = create_db_client
+        client.query("update item set name = '#{name}', price = '#{price}', 
+                     description = '#{description}' where id = #{id} ")
+    end
+
+    def get_id
+        client = create_db_client
+        id = client.query("SELECT name FROM item ORDER BY id DESC LIMIT 1;")
+        id = id.first["id"]
+    end
+
+    def create_item_categories_record(item_id, category_id)
+        client = create_db_client
+        record = client.query("insert into itemCategories (item_id, category_id) values 
+                ('#{item_id}','#{category_id}')")
+    end
+
+    def valid?
+        return false if @name.nil?
+        return false if @price.nil?
+
+        return true
+    end
+    # -------------------------------
+
+   def self.update_item(query)
+        client = create_db_client
+        client.query("update item set name = '#{query[:name]}', price = #{query[:price]}, 
+                     category_id = #{query[:category_id]}, description = '#{query[:description]}' 
+                     where id = #{query[:id]} ")    
+    end
+
+    def self.delete_item(id)
+        client = create_db_client
+        client.query("delete from item where id = #{id}")
+
+        record = self.get_item(id)
+        
+        record.empty?
+    end
+end

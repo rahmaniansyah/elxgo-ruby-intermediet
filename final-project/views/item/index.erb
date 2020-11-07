@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../style/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>elxgo - Menu</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1 class="text-center">MENU</h1>
+            <hr>
+                <div class="menu">
+                    <a href="/menu"> Menu</a>
+                    <a href="/category"> Category</a>
+                </div>
+            <hr>
+            <div class="card-body">
+                <table class="table-styled">
+                    <tbody>
+                        <tr>
+                            <td><a href="/menu/create" class="btn"> + New Food</a></td>
+                        </tr>
+                        <%= puts items.each %>
+                    <% items.each do |item| %>
+                        <tr>
+                            <td class="td-name">
+                                <div class="title"><%= item.name %></div>
+                                <div class="desc">
+                                    <%= item.description.nil? ? "Tidak ada deskripsi" : item.description %>
+                                </div>
+                                <div class="detail">
+                                    <a href="/menu/<%= item.id %>/show">View Detail</a>
+                                </div>
+                            </td>
+                            <td><a href="/menu/<%= item.id %>/edit" class="btn"><i class="fa fa-edit"></i></a></td>
+                            <td><a  class="btn" onclick="deleteConfirmation(<%= item.id %>)"><i class="fa fa-trash"></i></a></td>
+                            <td class="td-price">Rp. <%= item.price %></td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function deleteConfirmation(id) {
+        if (confirm("Are you sure?")) {
+            window.location.replace('/menu/'+id+'/delete');
+        }
+        return false;
+    }
+</script>
+<footer>
+    <%# <a href='https://www.freepik.com/photos/background'>Background photo created by freepik - www.freepik.com</a> %>
+</footer>
+</html>
