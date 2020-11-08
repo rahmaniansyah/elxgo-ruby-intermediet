@@ -51,8 +51,8 @@ class ItemController
     end
 
     def show(id)
-        item = Item.get_item(id)
-        category = Item.get_item_category(id)
+        item = Item.find_by_id(id)
+        category = Item.find_item_categories_by_id(id)
         
         ERB.new(File.read("./views/item/detail_item.erb")).result(binding)
     end

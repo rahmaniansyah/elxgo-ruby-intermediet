@@ -24,17 +24,17 @@ class Item
         items
     end
     
-    def self.get_item(id)
+    def self.find_by_id(id)
         client = create_db_client
-        raw_data = client.query("select * from item where id = #{id}")
+        raw_data = client.query("select * from items where id = #{id}")
         item = raw_data.to_a
         
         item
     end
 
-    def self.get_item_category(id)
+    def self.find_item_categories_by_id(id)
         client = create_db_client
-        raw_data = client.query("select category from categoriesOnItem_view where item_id = #{id}")
+        raw_data = client.query("select group_concat(category separator ', ') as category from items_categories_views where item_id = #{id} group by name")
         category = raw_data.to_a
         
         category
