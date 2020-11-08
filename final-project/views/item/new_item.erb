@@ -10,24 +10,29 @@
     <body>
         <div class="container">
             <div class="card">
-                <h1 class="text-center">Create New Food</h1>
+                <h1 class="text-center">MENU</h1>
                 <hr>
                 <div class="card-body">
                     <div class="form-style-2">
                         <form action="/menu/create" method="post">
                             <label for="name">
                                 <span>Name <span class="required">*</span></span>
-                                <input type="text" class="input-field" name="name" id="name" />
+                                <input type="text" class="input-field" name="name" id="name" required/>
                             </label>
                             <label for="price">
                                 <span>Price <span class="required">*</span></span>
-                                <input type="text" class="input-field" name="price" id="price" />
+                                <input type="text" class="input-field" name="price" id="price" required/>
                             </label>
-                            <label for="category"><span>Category</span><select name="category_id" class="select-field">
-                                <% categories.each do |category| %>
-                                    <option value="<%= category.id %>"><%= category.name %></option>
+                            <label for="category"><span>Category</span>
+                                <% puts 'categories' %>
+                                <% puts categories.empty? %>
+                                <% if !categories.empty? %>
+                                    <% categories.each do |category| %>
+                                        <input type="checkbox" name="category_id[]" value="<%= category.id %>"><%= category.name %><br/>
+                                    <% end %>
+                                <% else %>
+                                    No categories
                                 <% end %>
-                                </select>
                             </label>
                             <label for="description"><span>Description</span>
                                 <textarea name="description" class="textarea-field"></textarea>

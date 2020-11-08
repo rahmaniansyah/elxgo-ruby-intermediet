@@ -7,7 +7,7 @@ class Item
         @name = name
         @price = price
         @id = id
-        @categories = []
+        @categories = categories
         @description = description
     
     end
@@ -41,28 +41,43 @@ class Item
     end
 
     def save
-        # return false if valid?
+        # puts '---  check save validation ----'
+        # puts valid?
+        return false unless valid?
         
         client = create_db_client
-        # last_id = get_id.empty? ? 0 : get_id
-
-        # return get_id
-
-        # create new item
-        client.query("insert into item (name, price, description) values 
-            ('#{name}','#{price}','#{description}')")
-
-        # current_id = get_id
         
-        # if last_id < current_id
-        #     # create record to save category id on item
-        #     # create_item_categories_record(current_id, category_id)
+        client.query("insert into items (name, price, description) values 
+        ('#{name}','#{price}','#{description}')")
+        
+        item_id = is_item_created?
 
-        #     return true
-        # else
+        save_categories(categories, item_id) unless categories.nil?
 
-        #     return false
-        # end
+    end
+
+    def is_item_created?
+        client = create_db_client
+        # puts @name
+        # puts @price
+        # puts @description
+        result = client.query("SELECT id FROM items WHERE name = '#{@name}' AND price = '#{@price}' AND description = '#{@description}'")
+        result = result.to_a
+        
+        return false if result.empty?
+
+        id = result.first["id"]
+        
+        return id
+    end
+
+    def save_categories(categories, item_id)
+        # puts '-- check categories --'
+        # puts categories
+        client = create_db_client
+        categories.each do |category_id|
+            client.query("INSERT INTO item_categories (item_id, category_id) VALUES ('#{item_id}', '#{category_id}')")
+        end
     end
 
     def update

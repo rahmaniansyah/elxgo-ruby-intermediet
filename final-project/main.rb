@@ -11,9 +11,9 @@ get '/menu' do
 end
 
 # Route to open create new food
-get '/menu/create' do
+get '/menu/new' do
     item_controller = ItemController.new
-    item_controller.view_create
+    item_controller.view_new
 end
 
 # Route to process the created food
