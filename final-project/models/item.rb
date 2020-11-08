@@ -32,14 +32,6 @@ class Item
         item
     end
 
-    def self.find_item_categories_by_id(id)
-        client = create_db_client
-        raw_data = client.query("select group_concat(category separator ', ') as category from items_categories_views where item_id = #{id} group by name")
-        category = raw_data.to_a
-        
-        category
-    end
-
     def save
         # puts '---  check save validation ----'
         # puts valid?

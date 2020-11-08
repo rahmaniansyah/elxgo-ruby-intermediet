@@ -26,7 +26,7 @@ end
 get '/menu/:id/edit' do
     id = params["id"]
     item_controller = ItemController.new
-    item_controller.view_update(id)
+    item_controller.view_edit(id)
 end
 
 # Route to process the selected food

@@ -71,11 +71,10 @@ CREATE TABLE item_categories(
 ------------------------------------------------------------
 
 -- Display items belongs to categories
-SELECT items.name, item_categories.category_id, item_categories.item_id, categories.name AS category
+CREATE VIEW item_categories_views AS
+SELECT item_categories.id, items.name, item_categories.category_id, item_categories.item_id, categories.name AS category
 FROM items
 INNER JOIN item_categories ON items.id = item_categories.item_id
 INNER JOIN categories ON item_categories.category_id = categories.id;
 
-
-
-select name, group_concat(category separator ', ') as category from items_categories_views group by name where item_id = 1;
+select name, group_concat(category separator ', ') as category from item_categories_views group by name where item_id = 1;

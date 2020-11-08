@@ -24,13 +24,10 @@
                                 <span>Price</span>
                                 <input type="text" class="input-field" name="price" id="price" value="<%= item.first['price'] %>"/>
                             </label>
-                            <label for="category"><span>Category</span><select name="category" class="select-field">
-                                <% categories.each do |category| %>
-                                    <option value="<%= category.id %>" <%= "selected" if category.id.eql?(item.first['category_id']) %> >
-                                        <%= category.name %>
-                                    </option>
+                            <label for="category"><span>Category</span>
+                                <% categories.zip(selected_categories).each do |category, selected_category|%>
+                                    <input type="checkbox" name="category_id[]" value="<%= category.id %>" <%= 'checked' unless selected_category.nil?%>><%= category.name %><br/>
                                 <% end %>
-                                </select>
                             </label>
                             <label for="description"><span>Description</span>
                                 <textarea name="description" class="textarea-field"><%= item.first['description'] %></textarea>
