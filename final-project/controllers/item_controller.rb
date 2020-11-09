@@ -14,6 +14,14 @@ class ItemController
         ERB.new(File.read("./views/item/new_item.erb")).result(binding)
     end
 
+    def view_edit(id)
+        categories = Category.all
+        selected_categories = ItemCategories.find_categories_by_id(id)
+        item = Item.find_by_id(id)
+
+        ERB.new(File.read("./views/item/edit_item.erb")).result(binding)
+    end
+
     def create(params)
         item = Item.new(
             params['name'], params['price'], nil, params['category_id'], params['description']
@@ -23,32 +31,16 @@ class ItemController
         message = "New Food successfully created!"
         ERB.new(File.read("./views/success.erb")).result(binding)
 
-        # if new_item
-        #     message = "New Food successfully created!"
-        #     renderer = ERB.new(File.read("./views/success.erb"))
-        # else
-        #     renderer = ERB.new(File.read("./views/item/index.erb"))
-        # end
-        # renderer.result(binding)
-    end
-
-    def view_edit(id)
-        categories = Category.all
-        selected_categories = ItemCategories.find_categories_by_id(id)
-        item = Item.find_by_id(id)
-
-        ERB.new(File.read("./views/item/edit_item.erb")).result(binding)
     end
 
     def update(params)
-        puts '----- params -----'
-        puts params
         item = Item.new(
             params['name'], params['price'], params['id'], params['category_id'], params['description']
         )
 
         item.update
         item.update_categories
+        
         message = "Successfully update item!"
         ERB.new(File.read("./views/success.erb")).result(binding)
     end

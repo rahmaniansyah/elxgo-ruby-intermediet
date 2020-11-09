@@ -33,8 +33,6 @@ class Item
     end
 
     def save
-        # puts '---  check save validation ----'
-        # puts valid?
         return false unless valid?
         
         client = create_db_client
@@ -50,9 +48,6 @@ class Item
 
     def is_item_created?
         client = create_db_client
-        # puts @name
-        # puts @price
-        # puts @description
         result = client.query("SELECT id FROM items WHERE name = '#{@name}' AND price = '#{@price}' AND description = '#{@description}'")
         result = result.to_a
         
@@ -64,7 +59,6 @@ class Item
     end
 
     def update_categories
-
         delete_categories(id)
         save_categories(categories, id) unless categories.nil?
         
@@ -77,8 +71,6 @@ class Item
     end
 
     def save_categories(categories, item_id)
-        # puts '-- check categories --'
-        # puts categories
         client = create_db_client
         categories.each do |category_id|
             client.query("INSERT INTO item_categories (item_id, category_id) VALUES ('#{item_id}', '#{category_id}')")
@@ -109,7 +101,6 @@ class Item
 
         return true
     end
-    # -------------------------------
 
     def self.delete_by_id(id)
         client = create_db_client
