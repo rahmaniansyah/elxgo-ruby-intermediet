@@ -14,13 +14,23 @@
                 <hr>
                 <div class="card-body">
                     <div class="form-style-2">
-                        <form action="/category/<%= category.first["id"] %>/update" method="post">
+                        <form action="update" method="post">
                             <label for="name">
                                 <span>Name <span class="required">*</span></span>
                                 <input type="text" class="input-field" name="name" id="name" value="<%= category.first["name"]%>" />
                             </label>
+                            <label for="category"><span>Items</span>
+                                <% if !items.empty? %>
+                                    <% items.zip(selected_items).each do |item, selected_item| %>
+                                        <%= puts item.name, selected_item.nil?%>
+                                        <input type="checkbox" name="item_id[]" value="<%= item.id %>" <%= 'checked' unless selected_item.nil?%>><%= item.name %><br/>
+                                    <% end %>
+                                <% else %>
+                                    No items
+                                <% end %>
+                            </label>
                             <div class="submit">
-                                <a href="/menu" class="btn"> Cancel</a>
+                                <a href="/category" class="btn"> Cancel</a>
                                 <input type="submit" value="Update" />
                             </div>
                         </form>

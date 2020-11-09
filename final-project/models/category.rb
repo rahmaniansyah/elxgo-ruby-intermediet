@@ -6,27 +6,15 @@ class Category
     def initialize (name, id = nil, item = nil)
         @name = name
         @id = id
-        @items = []
+        @items = item
     end
 
-    def self.get_category(id)
+    def self.find_by_id(id)
         client = create_db_client
         raw_data = client.query("select * from categories where id = #{id}")
         category = raw_data.to_a
     
         category
-    end
-
-    def self.get_items_on_category(id)
-        client = create_db_client
-        raw_data = client.query("select * from itemOnCategories where category_id = #{id};")
-        items = Array.new
-        raw_data.each do |data|
-            item = Item.new(data["name"], nil, nil, nil)
-            items.push(item)
-        end
-
-        items
     end
 
     def self.all
@@ -50,6 +38,16 @@ class Category
     def update
         client = create_db_client
         client.query("update categories set name = '#{name}' where id = #{id} ")
+        
+        client.query("DELETE FROM item_categories WHERE category_id = #{id}")
+        save_categories unless @items.nil?
+    end
+
+    def save_categories
+        client = create_db_client
+        @items.each do |item|
+            client.query("INSERT INTO item_categories (item_id, category_id) VALUES ('#{item}', '#{@id}')")
+        end
     end
 
     def delete

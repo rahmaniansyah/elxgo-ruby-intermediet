@@ -18,6 +18,18 @@ class ItemCategories
         category
     end
 
+    def self.find_items_category_by_id(id)
+        client = create_db_client
+        raw_data = client.query("select * from item_categories_views where category_id = #{id};")
+        items = Array.new
+        raw_data.each do |data|
+            item = Item.new(data["name"], nil, nil, nil)
+            items.push(item)
+        end
+
+        items
+    end
+
     def self.find_categories_by_id(id)
         client = create_db_client
         raw_data = client.query("SELECT * FROM item_categories_views WHERE item_id = #{id} ORDER BY category_id ASC")

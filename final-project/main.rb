@@ -4,6 +4,10 @@ require './controllers/item_controller.rb'
 require './controllers/category_controller.rb'
 require './models/category.rb'
 
+# -------------------------------------
+#           ITEM / MENU
+# -------------------------------------
+
 # index page show list food
 get '/menu' do
     item_controller = ItemController.new
@@ -60,9 +64,18 @@ get '/success' do
     }
 end
 
+# -------------------------------------
+#           CATEGORY
+# -------------------------------------
+
 get '/category' do
     controller = CategoryController.new
     controller.index
+end
+
+get '/category/new' do
+    controller = CategoryController.new
+    controller.view_new
 end
 
 get '/category/:id/show' do
@@ -71,16 +84,10 @@ get '/category/:id/show' do
     controller.show(id)
 end
 
-get '/category/:id/assign' do
-    id = params["id"]
-    controller = CategoryController.new
-    controller.assign(id)
-end
-
 get '/category/:id/edit' do
     id = params["id"]
     controller = CategoryController.new
-    controller.view_update(id)
+    controller.view_edit(id)
 end
 
 post '/category/:id/update' do
@@ -95,12 +102,7 @@ get '/category/:id/delete' do
     controller.delete(id)
 end
 
-get '/new-category' do
-    controller = CategoryController.new
-    controller.page_create_category
-end
-
-post '/add-category' do
+post '/category/create' do
     controller = CategoryController.new
     controller.create_category(params)
 end
