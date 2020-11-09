@@ -1,4 +1,5 @@
 require './models/item.rb'
+require './controllers/item_controller.rb'
 require './db/mysql_connector.rb'
 
 describe Item do
@@ -12,7 +13,30 @@ describe Item do
         @item = Item.new("Nasi goreng", 10000, 1)
     end
 
-    context "when initialize with valid input" do
+    context "when valid param" do
+        describe '#index' do
+            it "should show all items" do
+                @item.save
+
+                item = Item.all.first
+
+                expect(item.name).to eq(@item.name)
+            end
+
+            it "should render correct view" do
+                # controller = ItemController.new
+                # response = controller.index
+
+                # @item.save
+
+                # items = Item.all
+                # expected_view = ERB.new(File.read("./views/item/index.erb"))
+
+                # expect(response).to eq(expected_view.result_with_hash({items: items}))
+            end
+        end
+        
+
         describe '#valid?' do
             it "should return true" do
                 item = Item.new("Nasi goreng", 10000, nil)
