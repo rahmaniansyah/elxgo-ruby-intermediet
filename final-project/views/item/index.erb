@@ -23,13 +23,12 @@
                         <tr>
                             <td><a href="/menu/new" class="btn"> + New Food</a></td>
                         </tr>
-                        <%= puts items.each %>
                     <% items.each do |item| %>
                         <tr>
                             <td class="td-name">
                                 <div class="title"><%= item.name %></div>
                                 <div class="desc">
-                                    <%= item.description.nil? ? "Tidak ada deskripsi" : item.description %>
+                                    <%= item.description.empty? ? "Tidak ada deskripsi" : item.description %>
                                 </div>
                                 <div class="detail">
                                     <a href="/menu/<%= item.id %>/show">View Detail</a>

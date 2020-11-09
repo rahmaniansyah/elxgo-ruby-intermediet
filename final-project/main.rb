@@ -30,7 +30,7 @@ get '/menu/:id/edit' do
 end
 
 # Route to process the selected food
-post '/update' do
+post '/menu/:id/update' do
     item_controller = ItemController.new
     item_controller.update(params)
 end

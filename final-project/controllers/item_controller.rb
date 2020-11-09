@@ -9,7 +9,7 @@ class ItemController
     end
 
     def view_new
-        categories = Category.get_all_categories
+        categories = Category.all
 
         ERB.new(File.read("./views/item/new_item.erb")).result(binding)
     end
@@ -41,13 +41,14 @@ class ItemController
     end
 
     def update(params)
-        # edit_item = Item.update_item(query)
+        puts '----- params -----'
+        puts params
         item = Item.new(
             params['name'], params['price'], params['id'], params['category_id'], params['description']
         )
 
         item.update
-
+        item.update_categories
         message = "Successfully update item!"
         ERB.new(File.read("./views/success.erb")).result(binding)
     end
@@ -60,7 +61,7 @@ class ItemController
     end
 
     def delete(id)
-        delete = Item.delete_item(id)
+        delete = Item.delete_by_id(id)
         if delete
             message = "Successfully delete item!"
         else

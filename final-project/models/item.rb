@@ -17,7 +17,7 @@ class Item
         raw_data = client.query("select * from items")
         items = Array.new
         raw_data.each do |data|
-            item = Item.new(data["name"], data["price"], data["id"], data["description"])
+            item = Item.new(data["name"], data["price"], data["id"], nil, data["description"])
             items.push(item)
         end
     
@@ -63,6 +63,19 @@ class Item
         return id
     end
 
+    def update_categories
+
+        delete_categories(id)
+        save_categories(categories, id) unless categories.nil?
+        
+    end
+
+    def delete_categories(id)
+        client = create_db_client
+        client.query("DELETE FROM item_categories WHERE item_id = #{id}")
+
+    end
+
     def save_categories(categories, item_id)
         # puts '-- check categories --'
         # puts categories
@@ -74,7 +87,7 @@ class Item
 
     def update
         client = create_db_client
-        client.query("update item set name = '#{name}', price = '#{price}', 
+        client.query("update items set name = '#{name}', price = '#{price}', 
                      description = '#{description}' where id = #{id} ")
     end
 
@@ -98,18 +111,11 @@ class Item
     end
     # -------------------------------
 
-   def self.update_item(query)
+    def self.delete_by_id(id)
         client = create_db_client
-        client.query("update item set name = '#{query[:name]}', price = #{query[:price]}, 
-                     category_id = #{query[:category_id]}, description = '#{query[:description]}' 
-                     where id = #{query[:id]} ")    
-    end
+        client.query("delete from items where id = #{id}")
 
-    def self.delete_item(id)
-        client = create_db_client
-        client.query("delete from item where id = #{id}")
-
-        record = self.get_item(id)
+        record = self.find_by_id(id)
         
         record.empty?
     end
