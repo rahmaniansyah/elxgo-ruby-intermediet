@@ -9,9 +9,9 @@ require './models/category.rb'
 # -------------------------------------
 
 # index page show list food
-get '/menu' do
+get '/:menu' do
     item_controller = ItemController.new
-    item_controller.index
+    item_controller.index(params)
 end
 
 # Route to open create new food

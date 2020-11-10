@@ -2,8 +2,9 @@ require './models/item.rb'
 require './models/item_category.rb'
 
 class ItemController
-    def index
-        items = Item.all
+    def index(params)
+        items = Item.all if params["find"].nil?
+        items = Item.find_by_like(params["find"]) unless params["find"].nil?
         
         ERB.new(File.read("./views/item/index.erb")).result(binding)
     end

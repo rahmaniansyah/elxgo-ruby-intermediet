@@ -78,3 +78,5 @@ INNER JOIN item_categories ON items.id = item_categories.item_id
 INNER JOIN categories ON item_categories.category_id = categories.id;
 
 select name, group_concat(category separator ', ') as category from item_categories_views group by name where item_id = 1;
+
+SELECT * FROM items WHERE name LIKE '%Nasi%';
