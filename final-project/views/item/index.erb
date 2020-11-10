@@ -31,21 +31,27 @@
                 </div>
                 <table class="table-styled">
                     <tbody>
-                    <% items.each do |item| %>
-                        <tr>
-                            <td class="td-name">
-                                <div class="title"><%= item.name %></div>
-                                <div class="desc">
-                                    <%= item.description.empty? ? "Tidak ada deskripsi" : item.description %>
-                                </div>
-                                <div class="detail">
-                                    <a href="/menu/<%= item.id %>/show">View Detail</a>
-                                </div>
-                            </td>
-                            <td><a href="/menu/<%= item.id %>/edit" class="btn"><i class="fa fa-edit"></i></a></td>
-                            <td><a  class="btn" onclick="deleteConfirmation(<%= item.id %>)"><i class="fa fa-trash"></i></a></td>
-                            <td class="td-price">Rp. <%= item.price %></td>
-                        </tr>
+                    <%= puts items.nil?%>
+                    <%= puts items%>
+                    <% unless items.nil? %>
+                        <% items.each do |item| %>
+                            <tr>
+                                <td class="td-name">
+                                    <div class="title"><%= item.name %></div>
+                                    <div class="desc">
+                                        <%= item.description.empty? ? "Tidak ada deskripsi" : item.description %>
+                                    </div>
+                                    <div class="detail">
+                                        <a href="/menu/<%= item.id %>/show">View Detail</a>
+                                    </div>
+                                </td>
+                                <td><a href="/menu/<%= item.id %>/edit" class="btn"><i class="fa fa-edit"></i></a></td>
+                                <td><a  class="btn" onclick="deleteConfirmation(<%= item.id %>)"><i class="fa fa-trash"></i></a></td>
+                                <td class="td-price">Rp. <%= item.price %></td>
+                            </tr>
+                        <% end %>
+                    <% else %>
+                        <tr><td>No Menu avaliable!</td></tr>
                     <% end %>
                     </tbody>
                 </table>

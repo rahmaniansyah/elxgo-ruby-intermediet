@@ -3,7 +3,7 @@ require './models/item_category.rb'
 
 class ItemController
     def index(params)
-        items = Item.all if params.nil?
+        items = Item.all
         items = Item.find_by_like(params["find"]) unless params.nil? || params.empty?
         
         ERB.new(File.read("./views/item/index.erb")).result(binding)

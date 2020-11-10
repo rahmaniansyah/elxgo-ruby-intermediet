@@ -24,7 +24,7 @@
                         <tr>
                             <td><a href="/customer/new" class="btn"> + add customer</a></td>
                         </tr>
-                    <% unless customers.nil? %>
+                    <% unless customers.empty? %>
                         <% customers.each do |customer| %>
                             <tr>
                                 <td class="td-name">

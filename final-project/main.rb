@@ -16,10 +16,10 @@ get '/menu' do
 end
 
 # index page show list food with filter
-get '/menu/:find' do
-    item_controller = ItemController.new
-    item_controller.index(params)
-end
+# get '/menu/:find' do
+#     item_controller = ItemController.new
+#     item_controller.index(params)
+# end
 
 # Route to open create new food
 get '/menu/new' do
@@ -126,14 +126,13 @@ get '/customer' do
 end
 
 # view page show all customer list with filter
-get '/customer/:find' do
-    @customer_controller.index(params)
-end
-
-# get '/customer/new' do
-#     controller = CategoryController.new
-#     controller.view_new
+# get '/customer/:find' do
+#     $customer_controller.index(params)
 # end
+
+get '/customer/new' do
+    $customer_controller.view_new
+end
 
 # get '/customer/:id/show' do
 #     id = params["id"]
