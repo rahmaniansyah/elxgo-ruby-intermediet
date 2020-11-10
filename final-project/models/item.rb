@@ -34,7 +34,7 @@ class Item
 
     def self.find_by_like(params)
         client = create_db_client
-        raw_data = client.query("SELECT * FROM items WHERE name LIKE '%#{params}%'")
+        raw_data = client.query("SELECT * FROM items WHERE name LIKE '%#{params}%' OR price LIKE '%#{params}%'")
         items = Array.new
         raw_data.each do |data|
             item = Item.new(data["name"], data["price"], data["id"], nil, data["description"])
