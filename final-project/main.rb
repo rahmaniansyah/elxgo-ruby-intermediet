@@ -2,6 +2,7 @@ require 'sinatra'
 require './models/item.rb'
 require './controllers/item_controller.rb'
 require './controllers/category_controller.rb'
+require './controllers/customer_controller.rb'
 require './models/category.rb'
 
 # -------------------------------------
@@ -9,7 +10,13 @@ require './models/category.rb'
 # -------------------------------------
 
 # index page show list food
-get '/:menu' do
+get '/menu' do
+    item_controller = ItemController.new
+    item_controller.index(params)
+end
+
+# index page show list food with filter
+get '/menu/:find' do
     item_controller = ItemController.new
     item_controller.index(params)
 end
@@ -106,4 +113,54 @@ post '/category/create' do
     controller = CategoryController.new
     controller.create_category(params)
 end
+
+# -------------------------------------
+#           CUSTOMER
+# -------------------------------------
+
+
+$customer_controller = CustomerController.new
+# view page show all customer list
+get '/customer' do
+    $customer_controller.index(params)
+end
+
+# view page show all customer list with filter
+get '/customer/:find' do
+    @customer_controller.index(params)
+end
+
+# get '/customer/new' do
+#     controller = CategoryController.new
+#     controller.view_new
+# end
+
+# get '/customer/:id/show' do
+#     id = params["id"]
+#     controller = CategoryController.new
+#     controller.show(id)
+# end
+
+# get '/customer/:id/edit' do
+#     id = params["id"]
+#     controller = CategoryController.new
+#     controller.view_edit(id)
+# end
+
+# post '/customer/:id/update' do
+#     id = params["id"]
+#     controller = CategoryController.new
+#     controller.update(params)
+# end
+
+# get '/customer/:id/delete' do
+#     id = params["id"]
+#     controller = CategoryController.new
+#     controller.delete(id)
+# end
+
+# post '/customer/create' do
+#     controller = CategoryController.new
+#     controller.create_category(params)
+# end
 
