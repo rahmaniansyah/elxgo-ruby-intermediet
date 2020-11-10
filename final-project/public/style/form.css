@@ -3,14 +3,6 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	font-size: 13px;
 }
-/* .form-style-2-heading{
-	font-weight: bold;
-	font-style: italic;
-	border-bottom: 2px solid #ddd;
-	margin-bottom: 20px;
-	font-size: 15px;
-	padding-bottom: 3px;
-} */
 .form-style-2 label{
 	display: block;
 	margin: 0px 0px 15px 0px;
@@ -24,15 +16,11 @@
 .form-style-2 span.required{
 	color:red;
 }
-/* .form-style-2 .tel-number-field{
-	width: 40px;
-	text-align: center;
-} */
 .form-style-2 input.input-field, .form-style-2 .select-field{
 	width: 48%;	
 }
+.form-style-2 
 .form-style-2 input.input-field, 
-/* .form-style-2 .tel-number-field,  */
 .form-style-2 .textarea-field, 
  .form-style-2 .select-field{
 	box-sizing: border-box;
@@ -48,12 +36,6 @@
 	padding: 7px;
 	outline: none;
 }
-/* .form-style-2 .input-field:focus, 
-.form-style-2 .tel-number-field:focus, 
-.form-style-2 .textarea-field:focus,  
-.form-style-2 .select-field:focus{
-	border: 1px solid #0C0;
-} */
 .form-style-2 .textarea-field{
 	height:100px;
 	width: 55%;

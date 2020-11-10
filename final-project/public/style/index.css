@@ -99,6 +99,29 @@ footer a{
     padding: 5px 34px;
 }
 
+.menu-header{
+    padding-left: 16px;
+}
+
+.menu-header .form-style-2 form{
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.menu-header input.input-field{
+    width: 78% !important;
+    margin-right: 2% !important;
+}
+
+.menu-header input[type=submit]{
+    width: 20%;
+}
+
+.menu-header .form-style-2{
+    padding-left: 0 !important;
+}
+
 .menu a{
     text-decoration: none;
     color: black;
