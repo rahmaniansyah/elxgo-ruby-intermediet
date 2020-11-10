@@ -46,7 +46,7 @@ class Customer
         return false unless valid?
 
         client = create_db_client
-        client.query("INSERT INTOR customers (name, email, phone) VALUES ('#{name}', '#{email}','#{phone}')")
+        client.query("INSERT INTO customers (name, email, phone) VALUES ('#{name}', '#{email}','#{phone}')")
     end
 
     def valid?

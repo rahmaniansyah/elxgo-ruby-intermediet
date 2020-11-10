@@ -5,22 +5,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../style/index.css">
         <link rel="stylesheet" href="../style/form.css">
-        <title>elxgo - Create New Category</title>
+        <title>elxgo - Create New Customer</title>
     </head>
     <body>
         <div class="container">
             <div class="card">
-                <h1 class="text-center">Create New Category</h1>
+                <h1 class="text-center">New Customer</h1>
                 <hr>
                 <div class="card-body">
                     <div class="form-style-2">
-                        <form action="/category/create" method="post">
+                        <form action="/customer/create" method="post">
                             <label for="name">
                                 <span>Name <span class="required">*</span></span>
-                                <input type="text" class="input-field" name="name" id="name" />
+                                <input type="text" class="input-field" name="name" id="name" required />
                             </label>
+                            <label for="phone">
+                                <span>Phone <span class="required">*</span></span>
+                                <input type="text" class="input-field" name="phone" id="phone" required />
+                            </label>
+                            <label for="email">
+                                <span>Email</span>
+                                <input type="text" class="input-field" name="email" id="email" />
+                            </label>
+                            <br/><br/><br/><br/>
                             <div class="submit">
-                                <a href="/menu" class="btn"> Cancel</a>
+                                <a href="/customer" class="btn"> Cancel</a>
                                 <input type="submit" value="Add" />
                             </div>
                         </form>

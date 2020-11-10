@@ -158,8 +158,7 @@ end
 #     controller.delete(id)
 # end
 
-# post '/customer/create' do
-#     controller = CategoryController.new
-#     controller.create_category(params)
-# end
+post '/customer/create' do
+    $customer_controller.create(params)
+end
 
