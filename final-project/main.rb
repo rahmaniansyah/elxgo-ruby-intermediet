@@ -136,21 +136,17 @@ end
 
 # get '/customer/:id/show' do
 #     id = params["id"]
-#     controller = CategoryController.new
-#     controller.show(id)
+#     $customer_controller.show(id)
 # end
 
-# get '/customer/:id/edit' do
-#     id = params["id"]
-#     controller = CategoryController.new
-#     controller.view_edit(id)
-# end
+get '/customer/:id/edit' do
+    id = params["id"]
+    $customer_controller.view_edit(id)
+end
 
-# post '/customer/:id/update' do
-#     id = params["id"]
-#     controller = CategoryController.new
-#     controller.update(params)
-# end
+post '/customer/:id/update' do
+    $customer_controller.update(params)
+end
 
 # get '/customer/:id/delete' do
 #     id = params["id"]

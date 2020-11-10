@@ -15,7 +15,7 @@ class Customer
         raw_data = client.query("SELECT * FROM customers")
         customers = Array.new
         raw_data.each do |data|
-            customer = Item.new(data["name"], data["email"], data["phone"], data["id"])
+            customer = Customer.new(data["phone"], data["id"], data["name"], data["email"])
             customers.push(customer)
         end
     
@@ -32,10 +32,10 @@ class Customer
 
     def self.find_by_like(parms)
         client = create_db_client
-        raw_data = client.query("SELECT * FROM customers WHERE name LIKE '%#{parms}% OR phone LIKE '%#{parms}% OR email LIKE '%#{parms}%'")
+        raw_data = client.query("SELECT * FROM customers WHERE name LIKE '%#{parms}%' OR phone LIKE '%#{parms}%' OR email LIKE '%#{parms}%' ")
         customers = Array.new
         raw_data.each do |data|
-            customer = Item.new(data["name"], data["email"], data["phone"], data["id"])
+            customer = Customer.new(data["phone"], data["id"], data["name"], data["email"])
             customers.push(customer)
         end
     
@@ -47,6 +47,14 @@ class Customer
 
         client = create_db_client
         client.query("INSERT INTO customers (name, email, phone) VALUES ('#{name}', '#{email}','#{phone}')")
+    end
+
+    def update
+        return false unless valid?
+
+        client = create_db_client
+        client.query("UPDATE customers SET name = '#{name}', phone = '#{phone}', 
+            email = '#{email}' WHERE id = #{id} ")
     end
 
     def valid?

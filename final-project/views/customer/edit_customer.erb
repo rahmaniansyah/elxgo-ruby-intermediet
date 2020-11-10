@@ -5,32 +5,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../../style/index.css">
         <link rel="stylesheet" href="../../style/form.css">
-        <title>elxgo - Edit Category</title>
+        <title>elxgo - Edit Customer</title>
     </head>
     <body>
         <div class="container">
             <div class="card">
-                <h1 class="text-center">CATEGORY</h1>
+                <h1 class="text-center">CUSTOMER</h1>
                 <hr>
                 <div class="card-body">
                     <div class="form-style-2">
                         <form action="update" method="post">
                             <label for="name">
                                 <span>Name <span class="required">*</span></span>
-                                <input type="text" class="input-field" name="name" id="name" value="<%= category.first["name"]%>" />
+                                <input type="text" class="input-field" name="name" id="name" value="<%= customer.first["name"]%>" required />
                             </label>
-                            <label for="category"><span>Items</span>
-                                <% if !items.empty? %>
-                                    <% items.zip(selected_items).each do |item, selected_item| %>
-                                        <%= puts item.name, selected_item.nil?%>
-                                        <input type="checkbox" name="item_id[]" value="<%= item.id %>" <%= 'checked' unless selected_item.nil?%>><%= item.name %><br/>
-                                    <% end %>
-                                <% else %>
-                                    No items
-                                <% end %>
+                            <label for="phone">
+                                <span>Phone <span class="required">*</span></span>
+                                <input type="text" class="input-field" name="phone" id="phone" value="<%= customer.first["phone"]%>" required />
                             </label>
+                            <label for="email">
+                                <span>Email</span>
+                                <input type="text" class="input-field" name="email" id="email" value="<%= customer.first["email"]%>"/>
+                            </label>
+                            <br/><br/><br/><br/>
                             <div class="submit">
-                                <a href="/category" class="btn"> Cancel</a>
+                                <a href="/customer" class="btn"> Cancel</a>
                                 <input type="submit" value="Update" />
                             </div>
                         </form>

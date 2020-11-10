@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/index.css">
+    <link rel="stylesheet" href="../style/form.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>elxgo - List Custimer</title>
+    <title>elxgo - List Customer</title>
 </head>
 <body>
     <div class="container">
@@ -19,11 +20,17 @@
                 </div>
             <hr>
             <div class="card-body">
+                <div class="menu-header">
+                    <a href="/customer/new" class="btn"> + add customer</a>
+                    <div class="form-style-2">
+                        <form action="/customer" method="get">
+                            <input type="text" class="input-field" name="find" placeholder="Find customer..."/>
+                            <input type="submit" value="Search" />
+                        </form>
+                    </div>
+                </div>
                 <table class="table-styled">
                     <tbody>
-                        <tr>
-                            <td><a href="/customer/new" class="btn"> + add customer</a></td>
-                        </tr>
                     <% unless customers.empty? %>
                         <% customers.each do |customer| %>
                             <tr>
