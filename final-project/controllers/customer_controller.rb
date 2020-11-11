@@ -29,11 +29,22 @@ class CustomerController
     end
 
     def update(params)
-        puts params
         customer = Customer.new(params['phone'], params['id'], params['name'], params['email'])
         customer.update
         
         message = "Successfully update customer!"
+        ERB.new(File.read("./views/success.erb")).result(binding)
+    end
+
+    def delete(id)
+        customer = Customer.new(nil, id)
+        customer.delete
+        # delete = Customer.delete_by_id(id)
+        # if delete
+            message = "Successfully delete item!"
+        # else
+        #     message = "Something went wrong!"
+        # end
         ERB.new(File.read("./views/success.erb")).result(binding)
     end
 end

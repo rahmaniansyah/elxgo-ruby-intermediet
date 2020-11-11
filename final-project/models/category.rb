@@ -53,6 +53,7 @@ class Category
     def delete
         client = create_db_client
         client.query("delete from categories where id = #{id}")
+        client.query("DELETE FROM item_categories WHERE category_id = #{id}")
 
         # record = self.get_category(id)
         

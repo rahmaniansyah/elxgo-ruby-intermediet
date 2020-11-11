@@ -57,6 +57,11 @@ class Customer
             email = '#{email}' WHERE id = #{id} ")
     end
 
+    def delete
+        client = create_db_client
+        client.query("DELETE FROM customers WHERE id = #{id}")
+    end
+
     def valid?
         return false if @phone.nil?
 

@@ -38,7 +38,7 @@
                                     <div class="title"><a href="/customer/<%= customer.id %>/show"><%= customer.name %></a></div>
                                 </td>
                                 <td><a href="/customer/<%= customer.id %>/edit" class="btn"><i class="fa fa-edit"></i></a></td>
-                                <td><a href="/customer/<%= customer.id %>/delete" class="btn"><i class="fa fa-trash"></i></a></td>
+                                <td><a class="btn" onclick="deleteConfirmation(<%= customer.id %>)"><i class="fa fa-trash"></i></a></td>
                             </tr>
                         <% end %>
                     <% else %>
@@ -49,6 +49,15 @@
             </div>
         </div>
     </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function deleteConfirmation(id) {
+        if (confirm("Are you sure?")) {
+            window.location.replace('/customer/'+id+'/delete');
+        }
+        return false;
+    }
+</script>   
 </body>
 <footer>
     <%# <a href='https://www.freepik.com/photos/background'>Background photo created by freepik - www.freepik.com</a> %>

@@ -117,6 +117,7 @@ class Item
     def self.delete_by_id(id)
         client = create_db_client
         client.query("delete from items where id = #{id}")
+        client.query("DELETE FROM item_categories WHERE item_id = #{id}")
 
         record = self.find_by_id(id)
         

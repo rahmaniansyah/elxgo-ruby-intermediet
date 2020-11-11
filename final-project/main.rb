@@ -148,11 +148,10 @@ post '/customer/:id/update' do
     $customer_controller.update(params)
 end
 
-# get '/customer/:id/delete' do
-#     id = params["id"]
-#     controller = CategoryController.new
-#     controller.delete(id)
-# end
+get '/customer/:id/delete' do
+    id = params["id"]
+    $customer_controller.delete(id)
+end
 
 post '/customer/create' do
     $customer_controller.create(params)
