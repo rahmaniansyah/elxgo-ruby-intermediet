@@ -36,15 +36,17 @@ class CustomerController
         ERB.new(File.read("./views/success.erb")).result(binding)
     end
 
+    def show(id)
+        customer = Customer.find_by_id(id)
+
+        ERB.new(File.read("./views/customer/detail_customer.erb")).result(binding)
+    end
+
     def delete(id)
         customer = Customer.new(nil, id)
         customer.delete
-        # delete = Customer.delete_by_id(id)
-        # if delete
-            message = "Successfully delete item!"
-        # else
-        #     message = "Something went wrong!"
-        # end
+        
+        message = "Successfully delete item!"
         ERB.new(File.read("./views/success.erb")).result(binding)
     end
 end

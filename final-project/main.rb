@@ -134,10 +134,10 @@ get '/customer/new' do
     $customer_controller.view_new
 end
 
-# get '/customer/:id/show' do
-#     id = params["id"]
-#     $customer_controller.show(id)
-# end
+get '/customer/:id/show' do
+    id = params["id"]
+    $customer_controller.show(id)
+end
 
 get '/customer/:id/edit' do
     id = params["id"]
