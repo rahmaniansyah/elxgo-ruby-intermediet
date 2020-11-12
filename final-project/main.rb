@@ -1,8 +1,10 @@
 require 'sinatra'
+require 'json'
 require './models/item.rb'
 require './controllers/item_controller.rb'
 require './controllers/category_controller.rb'
 require './controllers/customer_controller.rb'
+require './controllers/order_details_controller.rb'
 require './models/category.rb'
 
 # -------------------------------------
@@ -117,9 +119,8 @@ end
 # -------------------------------------
 #           CUSTOMER
 # -------------------------------------
-
-
 $customer_controller = CustomerController.new
+
 # view page show all customer list
 get '/customer' do
     $customer_controller.index(params)
@@ -157,3 +158,14 @@ post '/customer/create' do
     $customer_controller.create(params)
 end
 
+# -------------------------------------
+#           ORDER DETAILS
+# -------------------------------------
+$order_details_controller = OrderDetailsController.new
+
+post '/menu/add-order' do
+    # puts '--- params main ----'
+    # puts params
+    
+    $order_details_controller.add_order(params)
+end

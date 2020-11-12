@@ -1,9 +1,9 @@
 require './models/customer.rb'
+require './db/redis.rb'
 
 class CustomerController
     def index(params)
         customers = Customer.all
-        puts params
         customers = Customer.find_by_like(params["find"]) unless params.nil? || params.empty?
         
         ERB.new(File.read("./views/customer/index.erb")).result(binding)

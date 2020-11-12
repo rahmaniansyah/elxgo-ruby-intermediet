@@ -34,7 +34,7 @@ CREATE TABLE order_details(
     id INT NOT NULL auto_increment,
     order_id INT NOT NULL,
     item_id INT NOT NULL,
-    quantity INT,
+    price INT,
     PRIMARY KEY (id),
     FOREIGN KEY (order_id) REFERENCES orders (id) ON DELETE CASCADE,
     FOREIGN KEY (item_id) REFERENCES items (id) ON DELETE CASCADE

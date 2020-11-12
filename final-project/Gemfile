@@ -13,3 +13,6 @@ gem 'mysql2'
 
 # Unit test gem for ruby
 gem 'rspec'
+
+# Keep chart item on chace memory
+gem 'redis'
