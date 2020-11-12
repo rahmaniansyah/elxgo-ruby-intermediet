@@ -1,4 +1,4 @@
-require '../db/mysql_connector.rb'
+require './db/mysql_connector.rb'
 
 class Order
 

@@ -7,6 +7,7 @@
 	display: block;
 	margin: 0px 0px 15px 0px;
 }
+
 .form-style-2 label > span{
 	width: 100px;
 	float: left;
@@ -16,8 +17,13 @@
 .form-style-2 span.required{
 	color:red;
 }
-.form-style-2 input.input-field, .form-style-2 .select-field{
+.form-style-2 input.input-field{
 	width: 48%;	
+}
+
+.form-style-2 .select-field{
+	width: 100%;
+	margin-bottom: 2em;
 }
 .form-style-2 
 .form-style-2 input.input-field, 

@@ -1,19 +1,34 @@
 require 'json'
 require './models/order_details.rb'
+require './models/customer.rb'
 
 class OrderDetailsController
-    def add_order(params)
+    def index
+        items = OrderDetails.all_cache_orders
+        customers = Customer.all
+
+       ERB.new(File.read("./views/order/index.erb")).result(binding)
+    end
+    
+    def cache_order(params)
         puts '---- params ----'
         puts params
-        id = params["id"]
         item_id = params["item_id"]
-        price = params["price"]
-        order_details = OrderDetails.new(item_id, price, id)
+        quantity = params["quantity"]
+        
+        order_details = OrderDetails.new(item_id, quantity)
         order_details.create_cache
 
         return true
 
         # respond_to {|format| format.json { render result: "success" } }
         # return json ({"result" => "success"})
+    end
+
+    def delete(id)
+        OrderDetails.delete_cache(id)
+        items = OrderDetails.all_cache_orders
+
+        ERB.new(File.read("./views/order/index.erb")).result(binding)
     end
 end

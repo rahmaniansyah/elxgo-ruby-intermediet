@@ -4,6 +4,7 @@ require './models/item.rb'
 require './controllers/item_controller.rb'
 require './controllers/category_controller.rb'
 require './controllers/customer_controller.rb'
+require './controllers/order_controller.rb'
 require './controllers/order_details_controller.rb'
 require './models/category.rb'
 
@@ -159,13 +160,31 @@ post '/customer/create' do
 end
 
 # -------------------------------------
+#           ORDER
+# -------------------------------------
+$order_controller = OrderController.new
+
+# get '/order' do
+#     $order_controller.index
+# end
+
+# -------------------------------------
 #           ORDER DETAILS
 # -------------------------------------
 $order_details_controller = OrderDetailsController.new
 
+get '/order' do
+    $order_details_controller.index
+end
+
+get '/order/:id/delete' do
+    id = params["id"]
+    $order_details_controller.delete(id)
+end
+
 post '/menu/add-order' do
-    # puts '--- params main ----'
-    # puts params
+    puts '--- params main ----'
+    puts params
     
-    $order_details_controller.add_order(params)
+    $order_details_controller.cache_order(params)
 end

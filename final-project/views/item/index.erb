@@ -17,7 +17,7 @@
                     <a href="/menu"> Menu</a>
                     <a href="/category"> Category</a>
                     <a href="/customer"> Customer</a>
-                    <a href="/customer"> <i class="fas fa-shopping-cart"></i></a>
+                    <a href="/order"> <i class="fas fa-shopping-cart"></i></a>
                 </div>
             <hr>
             <div class="card-body">
@@ -47,7 +47,7 @@
                                     </div>
                                 </td>
                                 <td id="itemCount<%= item.id %>" style="visibility:hidden;">0</td>
-                                <td><a class="btn" onclick="addToCart(<%= item.id %>, <%= item.price %>)"><i class="fas fa-shopping-cart"></i></a></td>
+                                <td><a class="btn" onclick="addToCart(<%= item.id %>)"><i class="fas fa-shopping-cart"></i></a></td>
                                 <td><a href="/menu/<%= item.id %>/edit" class="btn"><i class="fa fa-edit"></i></a></td>
                                 <td><a  class="btn" onclick="deleteConfirmation(<%= item.id %>)"><i class="fa fa-trash"></i></a></td>
                                 <td class="td-price">Rp. <%= item.price %></td>
@@ -63,7 +63,7 @@
     </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    var count = 1;
+    
     function deleteConfirmation(id) {
         if (confirm("Are you sure?")) {
             window.location.replace('/menu/'+id+'/delete');
@@ -71,12 +71,11 @@
         return false;
     }
 
-    function addToCart(id, price) {
+    function addToCart(id) {
         if (confirm("Add to cart?")) {
-            $.post( "/menu/add-order", {"item_id": id, "price": price, "id": count})
+            $.post( "/menu/add-order", {"item_id": id, "quantity": 1})
             .done(function( data ) {
                 showCount(id);
-                count = count + 1;
             });
         }
         return false

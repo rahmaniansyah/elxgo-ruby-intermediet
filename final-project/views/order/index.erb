@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../style/index.css">
+    <link rel="stylesheet" href="../../style/form.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+    <title>elxgo - Menu</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1 class="text-center">CART</h1>
+            <hr>
+                <div class="menu">
+                    <a href="/menu"> Menu</a>
+                    <a href="/category"> Category</a>
+                    <a href="/customer"> Customer</a>
+                    <a href="/cart"> <i class="fas fa-shopping-cart"></i></a>
+                </div>
+            <hr>
+            <div class="card-body">
+                <div class="menu-header">
+                    <div class="form-style-2">
+                        <form action="/order" method="get">
+                            <input type="text" class="input-field" name="find" placeholder="Find something..."/>
+                            <input type="submit" value="Search" />
+                        </form>
+                    </div>
+                </div>
+                <table class="table-styled">
+                    <tbody>
+                        <% unless items.nil? %>
+                            <% items.each do |item| %>
+                                <tr>
+                                    <td class="td-name">
+                                        <div class="title"><%= item.name %></div>
+                                    </td>
+                                    <td><%= item.description %></td>
+                                    <td class="td-price">Rp. <%= item.price %></td>
+                                    <td><a class="btn" onclick="deleteConfirmation(<%= item.id %>)"><i class="far fa-times-circle"></i></a></td>
+                                </tr>
+                            <% end %>
+                        <% else %>
+                            <tr><td>No items on carts!</td></tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                    <div class="form-style-2">
+                        <form action="/order/create" method="get">
+                            <label for="customer">Customer:</label>
+                            <select class = "select-field" name="customer_id">
+                                <% unless customers.nil? %>
+                                    <% customers.each do |customer| %>
+                                        <option value="<%= customer.id %>"><%= customer.name %></option>
+                                    <% end %>
+                                <% else %>
+                                    No customer avaliable!
+                                <% end %>
+                            </select>
+                            <div class="submit">
+                                <a href="" class="btn"> Remove All</a>
+                                <input type="submit" value="Submit" />
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function deleteConfirmation(id) {
+        if (confirm("Are you sure?")) {
+            window.location.replace('/order/'+id+'/delete');
+        }
+        return false;
+    }
+</script>
+</body>
+<footer>
+    <%# <a href='https://www.freepik.com/photos/background'>Background photo created by freepik - www.freepik.com</a> %>
+</footer>
+</html>
