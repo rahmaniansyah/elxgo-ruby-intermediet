@@ -21,14 +21,6 @@
                 </div>
             <hr>
             <div class="card-body">
-                <div class="menu-header">
-                    <div class="form-style-2">
-                        <form action="/order" method="get">
-                            <input type="text" class="input-field" name="find" placeholder="Find something..."/>
-                            <input type="submit" value="Search" />
-                        </form>
-                    </div>
-                </div>
                 <table class="table-styled">
                     <tbody>
                         <% unless items.nil? %>
@@ -50,35 +42,44 @@
             </div>
         </div>
     </div>
+    <% unless items.nil? %>
     <div class="container">
         <div class="card">
             <div class="card-body">
-                    <div class="form-style-2">
-                        <form action="/order/create" method="get">
-                            <label for="customer">Customer:</label>
-                            <select class = "select-field" name="customer_id">
-                                <% unless customers.nil? %>
-                                    <% customers.each do |customer| %>
-                                        <option value="<%= customer.id %>"><%= customer.name %></option>
-                                    <% end %>
-                                <% else %>
-                                    No customer avaliable!
+                <div class="form-style-2">
+                    <form action="/order/create" method="get">
+                        <label for="customer">Customer:</label>
+                        <select class = "select-field" name="customer_id">
+                            <% unless customers.nil? %>
+                                <% customers.each do |customer| %>
+                                    <option value="<%= customer.id %>"><%= customer.name %></option>
                                 <% end %>
-                            </select>
-                            <div class="submit">
-                                <a href="" class="btn"> Remove All</a>
-                                <input type="submit" value="Submit" />
-                            </div>
-                        </form>
-                    </div>
+                            <% else %>
+                                No customer avaliable!
+                            <% end %>
+                        </select>
+                        <div class="submit">
+                            <a onclick="deleteAll()" class="btn"> Remove All</a>
+                            <input type="submit" value="Submit" />
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+    <% end %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     function deleteConfirmation(id) {
         if (confirm("Are you sure?")) {
             window.location.replace('/order/'+id+'/delete');
+        }
+        return false;
+    }
+
+    function deleteAll(){
+        if (confirm("Are you sure? this action will remove all items on cart")) {
+            window.location.replace('/order/delete-all');
         }
         return false;
     }

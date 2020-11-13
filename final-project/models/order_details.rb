@@ -52,4 +52,13 @@ class OrderDetails
 
         $redis.del(id)
     end
+
+    def self.delete_all_cache
+        puts '--- delete all'
+        return if $redis.keys.empty?
+
+        puts '--- delete all'
+
+        $redis.del($redis.keys)
+    end
 end

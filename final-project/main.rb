@@ -182,6 +182,10 @@ get '/order/:id/delete' do
     $order_details_controller.delete(id)
 end
 
+get '/order/delete-all' do
+    $order_details_controller.delete_all
+end
+
 post '/menu/add-order' do
     puts '--- params main ----'
     puts params

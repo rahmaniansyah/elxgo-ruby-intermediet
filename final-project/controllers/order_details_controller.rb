@@ -31,4 +31,12 @@ class OrderDetailsController
 
         ERB.new(File.read("./views/order/index.erb")).result(binding)
     end
+
+    def delete_all
+        puts '--- delete'
+        OrderDetails.delete_all_cache
+        items = OrderDetails.all_cache_orders
+        
+        ERB.new(File.read("./views/order/index.erb")).result(binding)
+    end
 end
