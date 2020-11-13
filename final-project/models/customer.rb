@@ -60,6 +60,8 @@ class Customer
     def delete
         client = create_db_client
         client.query("DELETE FROM customers WHERE id = #{id}")
+
+        return true
     end
 
     def valid?
