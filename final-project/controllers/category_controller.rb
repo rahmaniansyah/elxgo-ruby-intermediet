@@ -47,6 +47,8 @@ class CategoryController
     end
 
     def delete(id)
+        ItemCategories.delete_by_category_id(id)
+        
         category = Category.new(nil, id)
         category.delete
 

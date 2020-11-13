@@ -42,4 +42,11 @@ class ItemCategories
 
         item_categories
     end
+
+    def self.delete_by_category_id(id)
+        client = create_db_client
+        raw_data = client.query("DELETE FROM item_categories WHERE category_id = #{id}")
+
+        return true
+    end
 end

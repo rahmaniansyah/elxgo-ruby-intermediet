@@ -55,12 +55,12 @@ class Category
         client.query("delete from categories where id = #{id}")
         client.query("DELETE FROM item_categories WHERE category_id = #{id}")
 
-        # record = self.get_category(id)
-        
-        # record.empty?
+        return true
     end
 
     def valid?
         return false if @name.nil?
+
+        return true
     end
 end

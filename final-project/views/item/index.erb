@@ -32,9 +32,7 @@
                 </div>
                 <table class="table-styled">
                     <tbody>
-                    <%= puts items.nil?%>
-                    <%= puts items%>
-                    <% unless items.nil? %>
+                    <% unless items.empty? %>
                         <% items.each do |item| %>
                             <tr>
                                 <td class="td-name">
