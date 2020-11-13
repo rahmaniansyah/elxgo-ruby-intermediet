@@ -1,4 +1,6 @@
 require './models/item.rb'
+# require './models/category.rb'
+require './models/item_category.rb'
 require './controllers/item_controller.rb'
 require './db/mysql_connector.rb'
 
@@ -10,6 +12,10 @@ describe ItemController do
         client.query("TRUNCATE TABLE items")  
         client.query("SET FOREIGN_KEY_CHECKS = 1;")
 
+        # category = Category.new("main dish", 1)
+        # category.save
+
+        # @item = Item.new("Nasi goreng", 10000, 1, [1])
         @item = Item.new("Nasi goreng", 10000, 1)
     end
 
@@ -29,15 +35,6 @@ describe ItemController do
                 item = Item.find_by_id(1).first
                 expect(["Nasi goreng", 10000, 1]).to eq([item['name'], item['price'], item['id']])
             end
-
-            # it 'should render correct view' do
-            #     controller = ItemController.new
-            #     response = controller.view_new
-
-            #     expected_view = ERB.new(File.read("./views/item/new_item.erb"))
-
-            #     expect(response).to eq(expected_view)
-            # end
         end
     end
 
@@ -73,13 +70,21 @@ describe ItemController do
                 expect(["Mie goreng", 13000, 1]).to eq([record['name'], record['price'], record['id']])
             end
         end
+
+        # describe '#update_categories' do
+        #     it 'should update selected category' do
+        #         update_record = Item.new("Mie goreng", 13000, 1, [1, 2])
+        #         update_record.update_categories
+
+        #         record = ItemCategory.find_items_category_by_id(1).first
+        #         expect(1).to eq(record["category"])
+        #     end
+        # end
     end
 
     context 'when delete item' do
         describe '#delete_by_id' do
             it "should return true" do
-                # @item.save
-
                 record = Item.delete_by_id(1)
 
                 expect(record).to eq(true)
