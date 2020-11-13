@@ -80,3 +80,13 @@ INNER JOIN categories ON item_categories.category_id = categories.id;
 select name, group_concat(category separator ', ') as category from item_categories_views group by name where item_id = 1;
 
 SELECT * FROM items WHERE name LIKE '%Nasi%';
+
+-- Display order details for customer
+CREATE VIEW order_details_views AS
+SELECT items.name, (items.price * order_details.quantity) as price, order_details.quantity, orders.id as order_id
+FROM orders
+INNER JOIN order_details ON order_details.order_id = orders.id
+INNER JOIN items ON order_details.item_id = items.id;
+
+
+WHERE orders.id = 1;

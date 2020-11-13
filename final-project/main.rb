@@ -141,6 +141,15 @@ get '/customer/:id/show' do
     $customer_controller.show(id)
 end
 
+get '/customer/:id/show/:order_id/order' do
+    data = {
+        id: params["id"],
+        order_id: params["order_id"]
+    }
+        
+    $customer_controller.detail_order(data)
+end
+
 get '/customer/:id/edit' do
     id = params["id"]
     $customer_controller.view_edit(id)

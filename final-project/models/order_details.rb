@@ -40,6 +40,18 @@ class OrderDetails
         items
     end
 
+    def self.find_by_order_id(id)
+        client = create_db_client
+        raw_data = client.query("SELECT * FROM order_details_views WHERE order_id = #{id}")
+        order_details = Array.new
+        raw_data.each do |data|
+            order_detail = Item.new(data["name"], data["price"], nil, nil, data["quantity"])
+            order_details.push(order_detail)
+        end
+    
+        order_details 
+    end
+
     def self.delete_cache(id)
         # puts '--- hei ----' 
         # puts id

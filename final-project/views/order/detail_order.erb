@@ -3,14 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../../style/index.css">
+        <link rel="stylesheet" href="../../../../style/index.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-        <title>elxgo - Detail Customer</title>
+        <title>elxgo - Detail Order</title>
     </head>
     <body>
         <div class="container">
             <div class="card">
-                <h1 class="text-center">CUSTOMER</h1>
+                <h1 class="text-center">DETAIL ORDER</h1>
                 <hr>
                     <div class="menu">
                         <a href="/menu"> Menu</a>
@@ -20,42 +20,22 @@
                     </div>
                 <hr>
                 <div class="card-body">
-                    <table>
-                        <tr>
-                            <td>Name</td>
-                            <td>: <%= customer.first['name'] %></td>
-                        </tr>
-                        <tr>
-                            <td>Phone</td>
-                            <td>: <%= customer.first['phone'] %></td>
-                        </tr>
-                        <tr>
-                            <td>Email</td>
-                            <td>: <%= customer.first['email'] %></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="card">
-                <div class="card-body">
                     <h3>Orders</h3>
                     <table border=1 style="width: -webkit-fill-available;">
                         <% number = 0 %>
                         <% unless orders.empty? %>
                             <tr>
                                 <td>No.</td>
-                                <td>Order Date</td>
+                                <td>Name</td>
+                                <td>Quantity</td>
                                 <td>Total Price</td>
-                                <td></td>
                             </tr>
                             <% orders.each do |order| %>
                                 <tr>
                                     <td><%= number += 1 %></td>
-                                    <td><%= order.order_date %></td>
-                                    <td><%= order.total_price %></td>
-                                    <td><a href="/customer/<%= customer.first['id']%>/show/<%= order.id %>/order"><i class="fas fa-info-circle"></i></a></td>
+                                    <td><%= order.name %></td>
+                                    <td><%= order.description %></td>
+                                    <td><%= order.price %></td>
                                 </tr>
                             <% end %>
                         <% else %>

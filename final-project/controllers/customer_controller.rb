@@ -1,4 +1,5 @@
 require './models/customer.rb'
+require './models/order_details.rb'
 require './db/redis.rb'
 
 class CustomerController
@@ -38,8 +39,18 @@ class CustomerController
 
     def show(id)
         customer = Customer.find_by_id(id)
+        orders = Order.find_by_customer_id(id)
 
         ERB.new(File.read("./views/customer/detail_customer.erb")).result(binding)
+    end
+
+    def detail_order(params)
+        puts '--- params'
+        puts params[:order_id]
+        order_id = params[:order_id]
+        orders = OrderDetails.find_by_order_id(order_id)
+
+        ERB.new(File.read("./views/order/detail_order.erb")).result(binding)
     end
 
     def delete(id)
