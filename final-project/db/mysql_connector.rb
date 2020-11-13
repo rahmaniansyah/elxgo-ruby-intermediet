@@ -5,7 +5,7 @@ def create_db_client
         :host => 'localhost',
         :username => 'root',
         :password => '1305438asep',
-        :database => 'food_test_db'
+        :database => 'food_db'
     )
     client
 end

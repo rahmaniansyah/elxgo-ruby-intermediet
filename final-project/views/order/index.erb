@@ -20,54 +20,54 @@
                     <a href="/cart"> <i class="fas fa-shopping-cart"></i></a>
                 </div>
             <hr>
-            <div class="card-body">
-                <table class="table-styled">
-                    <tbody>
-                        <% unless items.nil? %>
-                            <% items.each do |item| %>
-                                <tr>
-                                    <td class="td-name">
-                                        <div class="title"><%= item.name %></div>
-                                    </td>
-                                    <td><%= item.description %></td>
-                                    <td class="td-price">Rp. <%= item.price %></td>
-                                    <td><a class="btn" onclick="deleteConfirmation(<%= item.id %>)"><i class="far fa-times-circle"></i></a></td>
-                                </tr>
-                            <% end %>
-                        <% else %>
-                            <tr><td>No items on carts!</td></tr>
-                        <% end %>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <% unless items.nil? %>
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-                <div class="form-style-2">
-                    <form action="/order/create" method="get">
-                        <label for="customer">Customer:</label>
-                        <select class = "select-field" name="customer_id">
-                            <% unless customers.nil? %>
-                                <% customers.each do |customer| %>
-                                    <option value="<%= customer.id %>"><%= customer.name %></option>
+            <div class="form-style-2">
+                <form action="/order/create" method="post">    
+                    <div class="card-body">
+                        <table class="table-styled">
+                            <tbody>
+                                <% unless items.nil? %>
+                                    <% items.each do |item| %>
+                                        <tr>
+                                            <td class="td-name">
+                                                <div class="title"><%= item.name %></div>
+                                            </td>
+                                            <td><%= item.description %></td>
+                                            <td class="td-price">Rp. <%= item.price %></td>
+                                            <td><a class="btn" onclick="deleteConfirmation(<%= item.id %>)"><i class="far fa-times-circle"></i></a></td>
+                                        </tr>
+                                        <input type="hidden" name="item_id[]" value="<%= item.id%>">
+                                        <input type="hidden" name="price[]" value=<%= item.price%>>
+                                        <input type="hidden" name="quantity[]" value="<%= item.description%>">
+                                    <% end %>
+                                <% else %>
+                                    <tr><td>No items on carts!</td></tr>
                                 <% end %>
-                            <% else %>
-                                No customer avaliable!
-                            <% end %>
-                        </select>
-                        <div class="submit">
-                            <a onclick="deleteAll()" class="btn"> Remove All</a>
-                            <input type="submit" value="Submit" />
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <% unless items.nil? %>
+                        <div class="card-body">
+                            <label for="customer">Customer:</label>
+                            <select class = "select-field" name="customer_id">
+                                <% unless customers.nil? %>
+                                    <% customers.each do |customer| %>
+                                        <option value="<%= customer.id %>"><%= customer.name %></option>
+                                    <% end %>
+                                <% else %>
+                                    No customer avaliable!
+                                <% end %>
+                            </select>
+                            <div class="submit">
+                                <a onclick="deleteAll()" class="btn"> Remove All</a>
+                                <input type="submit" value="Submit" />
+                            </div>
                         </div>
-                    </form>
-                </div>
+                    <% end %>
+                </form>
             </div>
         </div>
     </div>
-    <% end %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     function deleteConfirmation(id) {

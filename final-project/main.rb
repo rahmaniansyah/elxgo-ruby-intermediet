@@ -177,6 +177,10 @@ get '/order' do
     $order_details_controller.index
 end
 
+post '/order/create' do
+    $order_controller.create(params)
+end
+
 get '/order/:id/delete' do
     id = params["id"]
     $order_details_controller.delete(id)

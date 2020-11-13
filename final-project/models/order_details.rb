@@ -33,9 +33,6 @@ class OrderDetails
             raw_data = Item.find_by_id(data["item_id"]).to_a
             record = raw_data.first unless raw_data.empty?
             price = record["price"] * data["quantity"].to_i
-            puts '--- price'
-            puts price
-            puts record["price"] * data["quantity"].to_i
             item = Item.new(record["name"], price, record["id"], nil, data["quantity"].to_i)
             items.push(item)    
         end
@@ -44,21 +41,34 @@ class OrderDetails
     end
 
     def self.delete_cache(id)
-        puts '--- hei ----' 
-        puts id
-        puts $redis.get(id)
+        # puts '--- hei ----' 
+        # puts id
+        # puts $redis.get(id)
         return if $redis.get(id).nil?
-        puts '--- dadah ----'
+        # puts '--- dadah ----'
 
         $redis.del(id)
     end
 
     def self.delete_all_cache
-        puts '--- delete all'
+        # puts '--- delete all'
         return if $redis.keys.empty?
 
-        puts '--- delete all'
+        # puts '--- delete all'
 
         $redis.del($redis.keys)
+    end
+
+    def self.save(id, params)
+        item = params["item_id"]
+        quantity = params["quantity"]
+        
+        client = create_db_client
+        (0..(item.length-1)).each do |i|
+            client.query("INSERT INTO order_details (order_id, item_id, quantity) 
+                         VALUES (#{id}, #{item[i]}, #{quantity[i]})")
+        end
+
+        self.delete_all_cache
     end
 end

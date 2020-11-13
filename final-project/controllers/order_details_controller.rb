@@ -11,8 +11,8 @@ class OrderDetailsController
     end
     
     def cache_order(params)
-        puts '---- params ----'
-        puts params
+        # puts '---- params ----'
+        # puts params
         item_id = params["item_id"]
         quantity = params["quantity"]
         
