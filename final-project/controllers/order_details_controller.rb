@@ -11,8 +11,6 @@ class OrderDetailsController
     end
     
     def cache_order(params)
-        # puts '---- params ----'
-        # puts params
         item_id = params["item_id"]
         quantity = params["quantity"]
         
@@ -20,23 +18,13 @@ class OrderDetailsController
         order_details.create_cache
 
         return true
-
-        # respond_to {|format| format.json { render result: "success" } }
-        # return json ({"result" => "success"})
     end
 
     def delete(id)
         OrderDetails.delete_cache(id)
         items = OrderDetails.all_cache_orders
+        customers = Customer.all
 
-        ERB.new(File.read("./views/order/index.erb")).result(binding)
-    end
-
-    def delete_all
-        puts '--- delete'
-        OrderDetails.delete_all_cache
-        items = OrderDetails.all_cache_orders
-        
         ERB.new(File.read("./views/order/index.erb")).result(binding)
     end
 end

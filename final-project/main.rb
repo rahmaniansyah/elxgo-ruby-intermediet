@@ -172,6 +172,14 @@ end
 # -------------------------------------
 $order_controller = OrderController.new
 
+get '/order' do
+    $order_controller.index
+end
+
+get '/order/delete-all' do
+    $order_controller.delete_all
+end
+
 post '/order/create' do
     $order_controller.create(params)
 end
@@ -181,15 +189,7 @@ end
 # -------------------------------------
 $order_details_controller = OrderDetailsController.new
 
-get '/order' do
-    $order_details_controller.index
-end
-
 get '/order/:id/delete' do
     id = params["id"]
     $order_details_controller.delete(id)
-end
-
-get '/order/delete-all' do
-    $order_details_controller.delete_all
 end
