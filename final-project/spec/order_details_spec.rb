@@ -15,7 +15,7 @@ describe OrderDetailsController do
         item.save
     end
 
-    context 'when add item to cart' do      
+    context 'when item added to cart' do      
         describe '#chace_order' do
             it 'should save selected item to cahce memory' do
                 order_details = OrderDetails.new(1, 1)
@@ -30,17 +30,11 @@ describe OrderDetailsController do
     end
 
     context 'when cart given action' do
-        describe '#create' do
-            it 'should add to database' do
-                
-            end
-        end
-        
-        describe '#delete_all' do
-            it 'should delete all cache' do
-                OrderDetails.delete_all_cache
-    
-                expect($redis.keys.empty?).to eq(true)
+        describe '#delete' do
+            it 'should delete selected item on cart' do
+                OrderDetails.delete_cache(1)
+
+                expect($redis.get(1).nil?).to eq(true)
             end
         end
     end

@@ -117,6 +117,33 @@ post '/category/create' do
 end
 
 # -------------------------------------
+#           ORDER
+# -------------------------------------
+$order_controller = OrderController.new
+
+get '/order' do
+    $order_controller.index
+end
+
+get '/order/delete-all' do
+    $order_controller.delete_all
+end
+
+post '/order/create' do
+    $order_controller.create(params)
+end
+
+# -------------------------------------
+#           ORDER DETAILS
+# -------------------------------------
+$order_details_controller = OrderDetailsController.new
+
+get '/order/:id/delete' do
+    id = params["id"]
+    $order_details_controller.delete(id)
+end
+
+# -------------------------------------
 #           CUSTOMER
 # -------------------------------------
 $customer_controller = CustomerController.new
@@ -146,7 +173,7 @@ get '/customer/:id/show/:order_id/order' do
         order_id: params["order_id"]
     }
         
-    $customer_controller.detail_order(data)
+    $order_details_controller.show(data)
 end
 
 get '/customer/:id/edit' do
@@ -165,31 +192,4 @@ end
 
 post '/customer/create' do
     $customer_controller.create(params)
-end
-
-# -------------------------------------
-#           ORDER
-# -------------------------------------
-$order_controller = OrderController.new
-
-get '/order' do
-    $order_controller.index
-end
-
-get '/order/delete-all' do
-    $order_controller.delete_all
-end
-
-post '/order/create' do
-    $order_controller.create(params)
-end
-
-# -------------------------------------
-#           ORDER DETAILS
-# -------------------------------------
-$order_details_controller = OrderDetailsController.new
-
-get '/order/:id/delete' do
-    id = params["id"]
-    $order_details_controller.delete(id)
 end
