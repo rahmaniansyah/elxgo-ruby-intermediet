@@ -4,12 +4,6 @@ require './models/order_details.rb'
 require './models/customer.rb'
 
 class OrderController
-    # def index
-    #    items = OrderDetails.all_cache_orders
-
-    #    ERB.new(File.read("./views/order/index.erb")).result(binding)
-    # end
-
     def index
         items = OrderDetails.all_cache_orders
         customers = Customer.all

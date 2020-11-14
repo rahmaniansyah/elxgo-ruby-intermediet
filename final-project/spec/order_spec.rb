@@ -16,23 +16,25 @@ describe OrderController do
         item = Item.new("Nasi goreng", 10000, 1)
         item.save
 
-        customer = Customer.new("083822323807", 1, "rahma", "rahmaputri13@gmail.com")
+        customer = Customer.new("083822323807", 2, "rahma", "rahmaputri13@gmail.com")
         customer.save
     end
 
     context 'when cart given action' do
         describe '#create' do
             it 'should calculate total_price' do
-                @total_price = Order.total_price([10000,10000])
+                total_price = Order.total_price([10000,10000])
 
-                expect(@total_price).to eq(20000)
+                expect(total_price).to eq(20000)
             end
 
             it 'should save to database' do
-                order = Order.new(nil, nil, @total_price, 1)
+                order = Order.new(nil, nil, 20000, 2)
                 order.save
 
-                expect(@total_price).to eq(20000)
+                find_order = Order.find_by_customer_id(2)
+
+                expect(find_order.first.total_price).to eq(20000)
             end
         end
         
