@@ -5,7 +5,7 @@ class Order
     attr_accessor :order_date , :id , :total_price, :customer_id
     
     def initialize(order_date , id , total_price, customer_id = nil)
-        @order_date = generate_datetime
+        @order_date = order_date.nil? ? generate_datetime : order_date.strftime("%Y-%m-%d %k:%M:%S")
         @id = id
         @total_price = total_price
         @customer_id = customer_id
@@ -16,6 +16,7 @@ class Order
         raw_data = client.query("SELECT * FROM orders WHERE customer_id = #{id}")
         orders = Array.new
         raw_data.each do |data|
+            puts data["order_date"]
             order = Order.new(data["order_date"], data["id"], data["total_price"])
             orders.push(order)
         end

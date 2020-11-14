@@ -12,28 +12,16 @@ require './models/category.rb'
 #           ITEM / MENU
 # -------------------------------------
 
-# index page show list food
+# Route to index page show list food
 get '/menu' do
     item_controller = ItemController.new
     item_controller.index(params)
 end
 
-# index page show list food with filter
-# get '/menu/:find' do
-#     item_controller = ItemController.new
-#     item_controller.index(params)
-# end
-
 # Route to open create new food
 get '/menu/new' do
     item_controller = ItemController.new
     item_controller.view_new
-end
-
-# Route to process the created food
-post '/menu/create' do
-    item_controller = ItemController.new
-    item_controller.create(params)
 end
 
 # Route to update selected food
@@ -54,9 +42,6 @@ get '/menu/:id/delete' do
     id = params["id"]
     item_controller = ItemController.new
     item_controller.delete(id)
-    # 
-
-    # redirect '/menu'
 end
 
 # Route to open detail food
@@ -64,6 +49,20 @@ get '/menu/:id/show' do
     id = params["id"]
     item_controller = ItemController.new
     item_controller.show(id)
+end
+
+# Send params to created food
+post '/menu/create' do
+    item_controller = ItemController.new
+    item_controller.create(params)
+end
+
+# Send selected item data for cart
+post '/menu/add-to-order' do
+    puts '--- params main ----'
+    puts params
+    
+    $order_details_controller.cache_order(params)
 end
 
 get '/success' do
@@ -173,9 +172,9 @@ end
 # -------------------------------------
 $order_controller = OrderController.new
 
-# get '/order' do
-#     $order_controller.index
-# end
+post '/order/create' do
+    $order_controller.create(params)
+end
 
 # -------------------------------------
 #           ORDER DETAILS
@@ -186,10 +185,6 @@ get '/order' do
     $order_details_controller.index
 end
 
-post '/order/create' do
-    $order_controller.create(params)
-end
-
 get '/order/:id/delete' do
     id = params["id"]
     $order_details_controller.delete(id)
@@ -197,11 +192,4 @@ end
 
 get '/order/delete-all' do
     $order_details_controller.delete_all
-end
-
-post '/menu/add-order' do
-    puts '--- params main ----'
-    puts params
-    
-    $order_details_controller.cache_order(params)
 end

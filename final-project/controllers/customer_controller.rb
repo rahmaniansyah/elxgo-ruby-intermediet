@@ -40,6 +40,9 @@ class CustomerController
     def show(id)
         customer = Customer.find_by_id(id)
         orders = Order.find_by_customer_id(id)
+        puts '----'
+        puts orders.first.total_price
+        puts orders.first.order_date
 
         ERB.new(File.read("./views/customer/detail_customer.erb")).result(binding)
     end

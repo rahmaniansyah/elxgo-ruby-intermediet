@@ -71,7 +71,7 @@
 
     function addToCart(id) {
         if (confirm("Add to cart?")) {
-            $.post( "/menu/add-order", {"item_id": id, "quantity": 1})
+            $.post( "/menu/add-to-order", {"item_id": id, "quantity": 1})
             .done(function( data ) {
                 showCount(id);
             });

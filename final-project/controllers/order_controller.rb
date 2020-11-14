@@ -19,7 +19,7 @@ class OrderController
         
         OrderDetails.save(order_id, params)
 
-        # message = "New order successfully added!"
-        # ERB.new(File.read("./views/success.erb")).result(binding)
+        message = "New order successfully added!"
+        ERB.new(File.read("./views/success.erb")).result(binding)
     end
 end
