@@ -11,58 +11,49 @@ require './models/category.rb'
 # -------------------------------------
 #           ITEM / MENU
 # -------------------------------------
-
+$item_controller = ItemController.new
 # Route to index page show list food
 get '/menu' do
-    item_controller = ItemController.new
-    item_controller.index(params)
+    $item_controller.index(params)
 end
 
 # Route to open create new food
 get '/menu/new' do
-    item_controller = ItemController.new
-    item_controller.view_new
+    $item_controller.view_new
 end
 
 # Route to update selected food
 get '/menu/:id/edit' do
     id = params["id"]
-    item_controller = ItemController.new
-    item_controller.view_edit(id)
+    $item_controller.view_edit(id)
 end
 
 # Route to process the selected food
 post '/menu/:id/update' do
-    item_controller = ItemController.new
-    item_controller.update(params)
+    $item_controller.update(params)
 end
 
 # Route to delete food
 get '/menu/:id/delete' do
     id = params["id"]
-    item_controller = ItemController.new
-    item_controller.delete(id)
+    $item_controller.delete(id)
 end
 
 # Route to open detail food
 get '/menu/:id/show' do
     id = params["id"]
-    item_controller = ItemController.new
-    item_controller.show(id)
+    $item_controller.show(id)
 end
 
 # Send params to created food
 post '/menu/create' do
-    item_controller = ItemController.new
-    item_controller.create(params)
+    $item_controller.create(params)
 end
 
 # Send selected item data for cart
 post '/menu/add-to-order' do
-    puts '--- params main ----'
-    puts params
-    
-    $order_details_controller.cache_order(params)
+    order_details_controller = OrderDetailsController.new
+    order_details_controller.cache_order(params)
 end
 
 get '/success' do
@@ -76,44 +67,38 @@ end
 # -------------------------------------
 #           CATEGORY
 # -------------------------------------
+$category_controller = CategoryController.new
 
 get '/category' do
-    controller = CategoryController.new
-    controller.index
+    $category_controller.index
 end
 
 get '/category/new' do
-    controller = CategoryController.new
-    controller.view_new
+    $category_controller.view_new
 end
 
 get '/category/:id/show' do
     id = params["id"]
-    controller = CategoryController.new
-    controller.show(id)
+    $category_controller.show(id)
 end
 
 get '/category/:id/edit' do
     id = params["id"]
-    controller = CategoryController.new
-    controller.view_edit(id)
+    $category_controller.view_edit(id)
 end
 
 post '/category/:id/update' do
     id = params["id"]
-    controller = CategoryController.new
-    controller.update(params)
+    $category_controller.update(params)
 end
 
 get '/category/:id/delete' do
     id = params["id"]
-    controller = CategoryController.new
-    controller.delete(id)
+    $category_controller.delete(id)
 end
 
 post '/category/create' do
-    controller = CategoryController.new
-    controller.create_category(params)
+    $category_controller.create_category(params)
 end
 
 # -------------------------------------
@@ -152,11 +137,6 @@ $customer_controller = CustomerController.new
 get '/customer' do
     $customer_controller.index(params)
 end
-
-# view page show all customer list with filter
-# get '/customer/:find' do
-#     $customer_controller.index(params)
-# end
 
 get '/customer/new' do
     $customer_controller.view_new
